@@ -16,6 +16,6 @@ The exercises use `C:\lab\caldova\modules`. Each module has a `start` and a `fin
 
 These teaching files are shared with PREL38. Its 60-minute Part 2 walkthrough, live assessment and Java alternative are not additional LAB720 exercises. Follow the LAB720 instruction pane for timing, commands and account guidance.
 
-In the updated teaching files, `.github\modernize\repos.json` selects the gateway and `repos-portfolio.json` retains the six-app list. Prepared report paths use Caldova names. Interactive assessment defaults are in `C:\Users\LabUser\.modernize\assessment-config.yaml`; the module's `assess-config.yaml` is a separate explicit command-line input. If these files do not match, ask the facilitator to check the image.
+Step 1 opens the prepared report in `module-01-assess\start\.github\modernize\assessment-prebuilt`. Attendees do not open or change `repos.json`, `repos-portfolio.json` or the assessment configuration files. Prepared report paths use Caldova names; if a report still says `ZavaAuthGateway`, ask the facilitator to check the image.
 
 After modernization, continue to **SRE Agent** in the same lab manual. That section uses Caldova Retail Co., not the Caldova Bank modernization workload.

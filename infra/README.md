@@ -55,6 +55,19 @@ These are image-preparation changes, not participant steps. Publish the revised 
 
 **Skillable manual (November 3, 2026):** The **Modernize app code** section of the LAB720 Skillable manual (instruction set 362436) now matches [the repo guide](../instructions/modernize-app-code.md): the one-app `repos.json`, the Caldova report path, the Copilot access check in **Get ready**, the documented 20-40-minute provisioning window, and the HTTP 403 troubleshooting row. The manual shows the flow as a one-line text summary instead of the Mermaid diagram. No other manual sections changed. The initial update was confirmed by re-export and a fresh learner launch; the provisioning note was then checked in both the reloaded editor and rendered learner instructions. The saved text remained unchanged after ending the rehearsal without saving its VM. When the repo guide changes, update the Skillable manual in the same pass.
 
+**Fresh-user walkthrough (November 3, 2026):** A fresh launch (instance d7249f49) was walked as a new attendee, from the Windows sign-in screen through GitHub CLI sign-in. The setup did not match the instructions in these places:
+
+- The VM opened on the **LabUser** Windows password screen and locked again later. The Start page did not mention it.
+- The Start page's SSO step did not say which **Resources** values to use. The Microsoft sign-in asks for the **Username**, then **Enter Temporary Access Pass** (the **TAP**, not the Password). Edge then shows **Stay signed in?**, Edge sync and save-password prompts.
+- VS Code opened on a Settings tab with no sign-in prompt. The working path is title-bar **Sign In** > **Continue with GitHub** > **Continue** > scroll to **Authorize Visual-Studio-Code** > **Open** in the Edge prompt.
+- About 11 minutes after launch, VS Code showed **An error occurred while signing up for the GitHub Copilot Free plan**, which asks the user to contact an enterprise admin. That matches the documented 20-40-minute provisioning window.
+- Terminal was not on the taskbar. Right-click **Start** > **Terminal** opens Windows PowerShell.
+- GitHub CLI was signed out, as expected on every new VM, so the earlier "only if signed out" wording did not apply. `gh auth login --web --git-protocol https --clipboard` skips the host and protocol menus and copies the one-time code. The **Authorize github** button is below the fold.
+- **Type** is slow for multi-line blocks and does not press Enter after the last line. Long lines are cut off in the instruction pane.
+- The VM display disconnected about every one to two minutes after the host computer's screen locked. While the lab tab was hidden, the lab client dropped its remote-desktop connection. Attendees should keep the lab in one visible tab.
+
+[The repo guide](../instructions/modernize-app-code.md) now includes these sign-in steps with screenshots in **Get ready**. It also removes the assessment-input inspection from step 1 (`repos.json`, `assess-config.yaml` and the user-level defaults), replaces the interactive Modernize menus with the `--no-tty` planning command used in instance 66925696, makes the PII-skill copy safe to repeat, and names the Terminal tab for each step. The **Start** and **Modernize app code** pages of instruction set 362436 have **not** been updated to match yet. Update them from the guide and upload the `img/modernization/lab720-*.png` screenshots. The shortened third paragraph of [lab-root-README.md](lab-root-README.md) reaches attendees only after the image's `C:\lab\caldova\README.md` is updated.
+
 ### Use the LAB720 entry point
 
 The shared `caldova-rehearsal.zip` contains a root `caldova/README.md` headed **PREL38 Part 2**, with a 15/15/30-minute schedule. Extracting that archive into `C:\lab` places the longer pre-day walkthrough at `C:\lab\caldova\README.md`. That file is separate from the current LAB720 Skillable manual and can send attendees to the wrong timing and track.

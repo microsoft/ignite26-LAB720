@@ -52,7 +52,7 @@ The exercises require an assigned, prepared lab environment and lab accounts. Cl
 If you're following along during a live session:
 
 1. Use the participant access details supplied by your facilitator to open the assigned lab environment. Use the **Resources** tab for VM access and assigned account details, and open sign-in pages inside the VM.
-2. Follow **Start > GitHub and Copilot** in the lab manual, then open the [attendee instructions](instructions/README.md) for the modernization guide. Follow the facilitator's pacing and use the prepared assessment, plan, and results rather than waiting for long-running agent steps.
+2. Follow **Start > GitHub and Copilot** in the lab manual, then open the [attendee instructions](instructions/README.md) for the modernization guide. The guide's **Get ready** section repeats the sign-in steps with screenshots. Follow the facilitator's pacing and use the prepared assessment, plan, and results rather than waiting for long-running agent steps.
 3. Continue to **SRE Agent** in the lab manual. Reuse the assigned VM and accounts, but use that module's Caldova Retail Co. repository and Azure resource names rather than the Caldova Bank workload.
 
 #### On your own
