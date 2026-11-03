@@ -35,8 +35,8 @@ These are the **Start > GitHub and Copilot** steps from the lab manual. If you a
 
       ![Single sign-on to Skillable Events page with the Continue button highlighted.](../img/modernization/lab720-start-sso-continue.png)
 
-   2. On the Microsoft sign-in page, enter the **Username** value from **Resources** and select **Next**.
-   3. On **Enter Temporary Access Pass**, enter the **TAP** value from **Resources** (not the **Password**) and select **Sign in**.
+   2. On the Microsoft sign-in page, enter **Resources > Azure Portal > Username** and select **Next**. Do not use the VM's **LabUser** username.
+   3. On **Enter Temporary Access Pass**, enter **Resources > Azure Portal > TAP** (not either **Password** value) and select **Sign in**.
 
       ![Enter Temporary Access Pass page. Enter the TAP value here.](../img/modernization/lab720-start-temporary-access-pass.png)
 
@@ -52,7 +52,7 @@ These are the **Start > GitHub and Copilot** steps from the lab manual. If you a
 
       ![Edge prompt This site is trying to open Visual Studio Code with the Open button highlighted.](../img/modernization/lab720-open-vscode-prompt.png)
 
-**Copilot can take 20-40 minutes to become available after the lab launches.** Until then, VS Code may show the message below. Select **OK** and continue; Steps 1 and 2 do not need Copilot. [Skillable advises allowing 20-40 minutes for GitHub/Copilot access to populate](https://github.com/microsoft/ignite26-LAB720/issues/9#issuecomment-6317108726).
+**Copilot can take 20-40 minutes to become available after the lab launches.** Until then, VS Code may show the message below. Select **OK** and continue; the assessment and rulebook exercises (modernization steps 1 and 2) do not need Copilot. [Skillable advises allowing 20-40 minutes for GitHub/Copilot access to populate](https://github.com/microsoft/ignite26-LAB720/issues/9#issuecomment-6317108726).
 
 ![VS Code message: An error occurred while signing up for the GitHub Copilot Free plan. Please contact your enterprise admin to enable your managed account for Copilot Business. The OK button is highlighted.](../img/modernization/lab720-copilot-not-ready.png)
 
@@ -64,37 +64,39 @@ These are the **Start > GitHub and Copilot** steps from the lab manual. If you a
 - Keep the lab open in only one browser tab, and keep that tab visible. If the VM screen goes blank or shows the **LabUser** password screen, see [If something did not work](#if-something-did-not-work).
 - When VS Code asks **Do you trust the authors of the files in this folder?**, select **Yes, I trust the authors**. Do this only for the lab folders in this guide.
 
-### Open Terminal and sign in to GitHub CLI
+### Open Terminal
 
-1. In the VM, right-click **Start** and select **Terminal**. It opens **Windows PowerShell**. Run every command in this guide there.
+In the VM, right-click **Start** and select **Terminal**. It opens **Windows PowerShell**. Run every command in this guide there.
 
-   ![Right-click Start, then select Terminal.](../img/modernization/lab720-open-terminal.png)
+![Right-click Start, then select Terminal.](../img/modernization/lab720-open-terminal.png)
 
-2. Sign in to GitHub CLI. It is signed out on a new VM, even after you sign in to Edge and VS Code, because each keeps its own sign-in.
+### Sign in to GitHub CLI
 
-   ```powershell
-   gh auth login --web --git-protocol https --clipboard
-   ```
+GitHub CLI is signed out on a new VM, even after you sign in to Edge and VS Code, because each keeps its own sign-in.
 
-   1. At **Authenticate Git with your GitHub credentials? (Y/n)**, press **Enter**.
-   2. Terminal shows a one-time code and copies it to the clipboard. Press **Enter** to open the browser.
-   3. In Edge, select **Continue** on the account page.
-   4. Select the first code box, press **Ctrl+V** (or type the code shown in Terminal), and select **Continue**.
-   5. Scroll to the bottom of the page and select **Authorize github**.
+```powershell
+gh auth login --web --git-protocol https --clipboard
+```
 
-      ![The bottom of the Authorize GitHub CLI page, with the Authorize github button highlighted.](../img/modernization/lab720-authorize-github.png)
+1. At **Authenticate Git with your GitHub credentials? (Y/n)**, press **Enter**.
+2. Terminal shows a one-time code and copies it to the clipboard. Press **Enter** to open the browser.
+3. In Edge, select **Continue** on the account page.
+4. Select the first code box, press **Ctrl+V** (or type the code shown in Terminal), and select **Continue**.
+5. Scroll to the bottom of the page and select **Authorize github**.
 
-   6. When you see **Congratulations, you're all set!**, return to Terminal. It shows **Logged in as** and the lab account name.
+   ![The bottom of the Authorize GitHub CLI page, with the Authorize github button highlighted.](../img/modernization/lab720-authorize-github.png)
 
-3. Check the tools:
+6. When you see **Congratulations, you're all set!**, return to Terminal. It shows **Logged in as** and the lab account name.
 
-   ```powershell
-   git --version
-   gh auth status
-   Test-Path C:\lab\caldova\modules
-   modernize --version
-   dotnet --list-sdks
-   ```
+### Check the tools
+
+```powershell
+git --version
+gh auth status
+Test-Path C:\lab\caldova\modules
+modernize --version
+dotnet --list-sdks
+```
 
 **Before you continue:** `gh auth status` shows that you are logged in to github.com, the folder check returns `True`, and you see a Modernize version and a `10.0` .NET SDK. If something is missing, ask the facilitator. Do not install software, change permissions or use a personal account.
 
