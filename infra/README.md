@@ -51,6 +51,8 @@ Apply the naming/list migration across the existing local module branches so sel
 
 These are image-preparation changes, not participant steps. Publish the revised file paths only after they survive **Commit Changes** and a fresh LAB720 launch. A repository update or a staged script does not update the VM.
 
+**Image status (November 2, 2026):** These changes and the LAB720 entry-point README below were applied to VM profile 370024 and committed as disk layer 23 (`Win11-Base-Disk-226801-370024-1793672229-23.vhdx`). The development, ILT and self-paced LAB720 profiles share that layer. A fresh launch confirmed all six module repositories on `main` with no tracked changes (twelve branches checked), the one-app `repos.json`, six-app `repos-portfolio.json`, no `repos-live.json`, Caldova report names, the LabUser defaults hash and the root README. Module rulebook configuration was left unchanged. The `modernization/java` branch of `module-03-execute\start` still lacks the shared-rulebook config; that gap predates this update and is outside the .NET track. The signed-in rulebook-loading checks below still need a rehearsal.
+
 ### Use the LAB720 entry point
 
 The shared `caldova-rehearsal.zip` contains a root `caldova/README.md` headed **PREL38 Part 2**, with a 15/15/30-minute schedule. Extracting that archive into `C:\lab` places the longer pre-day walkthrough at `C:\lab\caldova\README.md`. That file is separate from the current LAB720 Skillable manual and can send attendees to the wrong timing and track.
