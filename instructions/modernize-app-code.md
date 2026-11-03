@@ -302,6 +302,7 @@ If you used the review-only fallback, say so; it does not complete the live hand
 | Symptom | Next action |
 |---|---|
 | Lab folder or tool missing | Ask the facilitator; do not install or use personal access |
+| Copilot returns HTTP 403, or VS Code says the managed account needs Copilot Business | Stop live planning/execution and ask the facilitator to check the assigned account's Copilot access. Successful SSO and `gh auth status` do not prove entitlement. Use prepared review only, marked **not run**, rather than switching to a personal account |
 | CLI rejects the model | Confirm the command includes `--model auto`; VS Code's picker is separate |
 | Rulebook not loaded | Check the actual working-directory config, shared URL and `gh auth status`; stop live work and ask the facilitator |
 | Agent takes too long | Review the prepared result and record your run as pending |
