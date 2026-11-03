@@ -52,7 +52,7 @@ The exercises require an assigned, prepared lab environment and lab accounts. Cl
 If you're following along during a live session:
 
 1. Use the participant access details supplied by your facilitator to open the assigned lab environment. Use the **Resources** tab for VM access and assigned account details, and open sign-in pages inside the VM.
-2. Follow **Start > GitHub and Copilot** in the lab manual, then open the [attendee instructions](instructions/README.md) for the modernization guide. Follow the facilitator's pacing and use the prepared assessment, plan, and results rather than waiting for long-running agent steps.
+2. Stay in the Skillable instruction pane: follow **Start > GitHub and Copilot**, then **Modernize app code**. Follow the facilitator's pacing and use the prepared assessment, plan, and results rather than waiting for long-running agent steps. The [repo guide](instructions/modernize-app-code.md) is a reference copy; you do not need to switch guides during the lab.
 3. Continue to **SRE Agent** in the lab manual. Reuse the assigned VM and accounts, but use that module's Caldova Retail Co. repository and Azure resource names rather than the Caldova Bank workload.
 
 #### On your own
@@ -60,7 +60,7 @@ If you're following along during a live session:
 If you're learning at your own pace:
 
 1. Confirm access to the assigned lab environment and complete lab manual with the lab provider. The exercises depend on its VM, prepared files, and assigned GitHub and Azure accounts; repository access alone is not enough.
-2. Follow [Modernize application code with GitHub Copilot](instructions/modernize-app-code.md), beginning with **Get ready**. Work through each checkpoint, use the prepared results while live work runs, and record any checks or tasks that remain unverified.
+2. In the Skillable instruction pane, follow **Start > GitHub and Copilot**, then **Modernize app code**. Work through each checkpoint, use the prepared results while live work runs, and record any checks or tasks that remain unverified. [Modernize application code with GitHub Copilot](instructions/modernize-app-code.md) provides the same steps as a repo reference, including sign-in screenshots in **Get ready**.
 3. Follow the **SRE Agent** module in the lab manual for the operations exercises. Keep the two workloads separate and verify the customer-visible result of the search investigation.
 
 ### 🎯 Learning outcomes
