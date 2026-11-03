@@ -2,6 +2,8 @@
 
 Read an application assessment, start a rulebook-guided modernization, and check the result rather than trusting a successful agent response.
 
+This exercise uses the assigned VM and account, with prepared Caldova Bank files. It does not depend on completing an Azure Migrate exercise. The later SRE Agent module uses a separate Caldova Retail Co. workload.
+
 | Stage | Time | Your result |
 |---|---|---|
 | Assess | 8 minutes | Identify the sign-in provider and its database risks |
@@ -10,9 +12,19 @@ Read an application assessment, start a rulebook-guided modernization, and check
 
 This is the **45-minute .NET track** for **Caldova Bank**. Under `C:\lab\caldova\modules`, each exercise has a `start` folder (before) and a `finish` folder (prepared after). A separate `final\dotnet` snapshot shows the validated three-application end state. Do not replace the deliberately flawed `finish` review example with `final`.
 
-Start the slow agent work, then inspect the prepared result instead of waiting. Keep a short notes file: distinguish **my run**, **prepared example**, **pending**, and **not run**.
+The plan and execution commands can take several minutes. Start each run when the guide says to, then review the supplied results while it continues. In your notes, distinguish **my run**, **prepared example**, **pending**, and **not run**.
 
 **Separate workloads:** Caldova Bank is not Caldova Retail Co. in the later SRE Agent module. Reuse the assigned VM and accounts, but follow each module's repositories and resource names.
+
+```mermaid
+flowchart LR
+    M["LAB720 setup<br/>GitHub and Copilot"] --> A["Read prepared assessment<br/>8 min<br/>Caldova Bank"]
+    A --> P["Plan<br/>12 min<br/>Caldova Bank"]
+    P --> E["Execute and verify<br/>25 min<br/>Caldova Bank"]
+    E --> S["SRE Agent<br/>later module<br/>Caldova Retail Co."]
+```
+
+Use the modernization steps for Caldova Bank only. When you continue to SRE Agent, switch to that module's own repository and Azure resource names.
 
 ---
 
@@ -23,17 +35,19 @@ Continue in the assigned VM after **Start > GitHub and Copilot** in the lab manu
 1. Open **Windows Terminal > PowerShell inside the VM** and check:
 
    ```powershell
+   git --version
    gh auth status
    Test-Path C:\lab\caldova\modules\module-01-assess\start
    modernize --version
+   dotnet --list-sdks
    ```
 
 2. Only if GitHub CLI is signed out, keep the lab's Enterprise SSO page open in the VM browser and run `gh auth login`. Choose **GitHub.com > Login with a web browser**, complete the one-time-code prompt, and authorize the expected GitHub CLI request. The browser, VS Code and `gh` have separate sessions even though they use the same assigned identity.
-3. Use **Auto** in VS Code. Every Modernize command below also passes **`--model auto`**; the VS Code model picker does not set the CLI model.
+3. In VS Code, use **Auto** in the model picker. Every Modernize command below also passes **`--model auto`**; the VS Code model picker does not set the CLI model.
 
 **Command entry:** Focus the PowerShell prompt inside the VM before using Skillable's **Type** button or pasting. Wait until the whole command appears, then press **Enter inside the VM**. For a multiline-paste warning, check the text and select **Paste anyway** only for the expected lab command. Trust only the supplied lab workspace when VS Code asks.
 
-**Before you continue:** The folder check is `True`, `gh auth status` succeeds, and the CLI is available. If a tool or folder is missing, ask the facilitator; do not install software, change permissions or switch to a personal account.
+**Before you continue:** Git and the Modernize CLI are available, the folder check is `True`, `gh auth status` succeeds, and a .NET 10 SDK appears in the list. If a tool or folder is missing, ask the facilitator; do not install software, change permissions or switch to a personal account. The prepared-image tool list is in [Infrastructure](../infra/README.md).
 
 ---
 
@@ -47,11 +61,16 @@ Identify the **provider** (the service other applications call) before its **con
 
    ```powershell
    cd C:\lab\caldova\modules\module-01-assess\start
-   Get-Content .github\modernize\repos-live.json
+   Get-Content .github\modernize\repos.json
    Get-Content .github\modernize\assess-config.yaml
+   Get-Content "$HOME\.modernize\assessment-config.yaml"
    ```
 
-   These inputs select the gateway and target .NET 10 on Azure Container Apps with Full analysis. The prepared portfolio is an earlier estate-wide report, not output from these current inputs. **Do not run a new assessment in this shortened lab.**
+   The updated teaching files use **`repos.json` for the one-app list**, selecting `CaldovaAuthGateway`. The old six-app list is now **`repos-portfolio.json`**; the former `repos-live.json` is no longer needed. This is a filename change within the supplied modernization files, not an input from Azure Migrate.
+
+   The module's `assess-config.yaml` remains the configuration passed explicitly by the command-line reference. Interactive Modernize menus instead read **`$HOME\.modernize\assessment-config.yaml`**. The prepared defaults use Full analysis, High CVE severity, .NET 10 and Azure Container Apps; the shared defaults also retain OpenJDK 21 and Linux for PREL38's Java track, which is not an extra LAB720 exercise. The planning/execution file **`.github\modernize\config.json`** is separate: it enables the shared rulebook.
+
+   The prepared portfolio is an earlier estate-wide report, not output from these current inputs. **Do not run a new assessment or change the supplied assessment inputs in this shortened lab.** If the VM still has the old list names or lacks the user-level defaults, ask the facilitator to check the image rather than renaming files yourself.
 
 2. In File Explorer, open:
 
@@ -61,7 +80,7 @@ Identify the **provider** (the service other applications call) before its **con
 
    Open the actual `reports-...` folder, then `index.html`. If Windows asks which app to use, select **Microsoft Edge > Just once**. A notation such as `reports-<timestamp>` means the real folder, not literal angle brackets.
 
-3. Review the portfolio, then open `repos\ZavaAuthGateway` inside that report folder. The historical **Zava** names correspond to the **Caldova** applications in your working folders; do not rename the report files.
+3. Review the portfolio, then open `repos\CaldovaAuthGateway` inside that report folder. The prepared report's text and paths now use **Caldova** names. If you still see `ZavaAuthGateway`, ask the facilitator to check the image; do not rename the report yourself. The naming update does not make this a newly generated assessment.
 4. Open `facts\data-architecture.md` and `facts\configuration-inventory.md` there. Find `System.Data.SqlClient`, SQL-login settings (`DB_USER`/`DB_PASSWORD`), and certificate-validation settings.
 
 These are application-code findings, **not a live database assessment**. An inferred data model does not prove that tables or seed data exist, that a connection works, or that a migration completed. Use the facts and source when a topology graph omits a relationship.
@@ -104,7 +123,7 @@ All learners use the same [Caldova workshop rulebook](https://github.com/ayangup
    Copy-Item skills\pii-masking apps\CaldovaAuthGateway\.github\skills\ -Recurse
    ```
 
-**Before you continue:** You can distinguish the shared rules from the PII skill, and the config points to the shared repository. If config/access is missing, ask the facilitator and use the prepared-plan review in step 3, item 4; record live planning/execution as **not run**. Do not substitute a local folder or invent a URL.
+**Before you continue:** You can distinguish the shared rules from the personally identifiable information (PII) skill, and the config points to the shared repository. If config/access is missing, ask the facilitator and use the prepared-plan review in step 3, item 4; record live planning/execution as **not run**. Do not substitute a local folder or invent a URL.
 
 ---
 
@@ -130,7 +149,7 @@ Start a live gateway plan, then use the prepared plan while it runs.
 
    Replace the default plan name with **`caldova-dotnet-modernization`**. At the goal prompt, press **Ctrl+V** to paste the goal. Answer clarifying questions using the shared rules; do not accept provisioning or deployment.
 
-3. Look for **`Rulebook loaded (3 files)`**, then leave the run open. When a live plan finishes, its folder should also contain `rulebook-compliance.md` and `.metadata\rulebook-metadata.json`; check the metadata's source URL. The loading message is evidence that the CLI read the rules, not that the resulting code complies.
+3. Look for **`Rulebook loaded (3 files)`**, then leave the run open. This message means the live command read the three shared rulebook files; it does not prove the plan or code complies. When a live plan finishes, its folder should also contain `rulebook-compliance.md` and `.metadata\rulebook-metadata.json`; check the metadata's source URL.
 
 ![CLI reports SUCCESS: Rulebook loaded (3 files)](../img/modernization/caldova-rulebook-loaded.png)
 
@@ -298,7 +317,7 @@ For a new assessment outside the shortened flow:
 ```powershell
 cd C:\lab\caldova\modules\module-01-assess\start
 modernize assess `
-  --source "$PWD\.github\modernize\repos-live.json" `
+  --source "$PWD\.github\modernize\repos.json" `
   --assess-config "$PWD\.github\modernize\assess-config.yaml" `
   --output-path "$PWD\.github\modernize\assessment" `
   --model auto `
