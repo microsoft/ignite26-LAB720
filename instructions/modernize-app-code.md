@@ -52,10 +52,6 @@ These are the **Start > GitHub and Copilot** steps from the lab manual. If you a
 
       ![Edge prompt This site is trying to open Visual Studio Code with the Open button highlighted.](../img/modernization/lab720-open-vscode-prompt.png)
 
-**Copilot can take 20-40 minutes to become available after the lab launches.** Until then, VS Code may show the message below. Select **OK** and continue; the assessment and rulebook exercises (modernization steps 1 and 2) do not need Copilot. [Skillable advises allowing 20-40 minutes for GitHub/Copilot access to populate](https://github.com/microsoft/ignite26-LAB720/issues/9#issuecomment-6317108726).
-
-![VS Code message: An error occurred while signing up for the GitHub Copilot Free plan. Please contact your enterprise admin to enable your managed account for Copilot Business. The OK button is highlighted.](../img/modernization/lab720-copilot-not-ready.png)
-
 ### Entering commands
 
 - Select inside the Terminal window in the VM, then select **Type** on a code block.
@@ -210,7 +206,7 @@ Start a live plan for the gateway, then review the prepared plan while it runs.
 
 2. Look for **`Rulebook loaded (3 files)`**, then leave the run going. This message means the live command read the three shared rulebook files; it does not prove the plan or code complies. When the run finishes, `apps\CaldovaAuthGateway\.github\modernize\caldova-dotnet-modernization` should contain `plan.md`, `rulebook-compliance.md` and `.metadata\rulebook-metadata.json`; check that the metadata's source URL is the shared rulebook.
 
-   If the run returns HTTP 403 or another Copilot access error, Copilot is not ready for your account yet. Tell the facilitator, continue with the prepared plan below, and record live planning as **not run**.
+   If the run returns HTTP 403 or another Copilot access error, tell the facilitator, continue with the prepared plan below, and record live planning as **not run**.
 
 ![CLI reports SUCCESS: Rulebook loaded (3 files)](../img/modernization/caldova-rulebook-loaded.png)
 
@@ -373,7 +369,7 @@ If you used the review-only fallback, say so; it does not complete the live hand
 | Nothing happens after **Type** finishes | **Type** does not press Enter after the last line. Select the Terminal window and press **Enter** |
 | You cannot find an **Authorize** button | Scroll to the bottom of the GitHub page |
 | `gh auth status` says you are not logged in | Run the GitHub CLI sign-in in **Get ready** |
-| Copilot returns HTTP 403, or VS Code says the managed account needs Copilot Business | Copilot access can take 20-40 minutes after launch. If it still fails when you reach step 3, ask the facilitator to check the assigned account's Copilot access. Successful SSO and `gh auth status` do not prove access. Use the prepared review only, marked **not run**, rather than switching to a personal account |
+| Copilot returns HTTP 403, or VS Code says the managed account needs Copilot Business | Ask the facilitator to check the assigned account's Copilot access. Successful SSO and `gh auth status` do not prove access. Use the prepared review only, marked **not run**, rather than switching to a personal account |
 | Lab folder or tool missing | Ask the facilitator; do not install software or use personal access. The prepared VM's tool list is in [Infrastructure](../infra/README.md) |
 | The prepared report still says `ZavaAuthGateway` | Ask the facilitator to check the image; do not rename files yourself |
 | CLI rejects the model | Confirm the command includes `--model auto`; VS Code's model picker is separate |

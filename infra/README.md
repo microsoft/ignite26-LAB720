@@ -55,6 +55,8 @@ These are image-preparation changes, not participant steps. Publish the revised 
 
 **Earlier Skillable manual update (November 3, 2026):** The **Modernize app code** section of instruction set 362436 was updated for the Caldova report paths and the 20-40-minute Copilot provisioning window, and checked in a fresh learner launch. The fresh-user update below supersedes its assessment-input inspection and interactive planning instructions. When the repo guide changes, update the Skillable manual in the same pass.
 
+**Session delivery (November 5, 2026):** All labs will be pre-provisioned. The learner guide no longer includes the Copilot provisioning-delay warning or its error screenshot. The provisioning timings recorded here describe earlier authoring rehearsals, not an attendee waiting period.
+
 **Fresh-user walkthrough (November 3, 2026):** A fresh launch (instance d7249f49) was walked as a new attendee, from the Windows sign-in screen through GitHub CLI sign-in. The setup did not match the instructions in these places:
 
 - The VM opened on the **LabUser** Windows password screen and locked again later. The Start page did not mention it.
