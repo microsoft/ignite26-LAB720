@@ -97,3 +97,12 @@ The separate prepared execution workspace was clean before switching to `moderni
 Keep shared-image promotion coordinated with the other module owners. Merging this configuration file or the documentation PR does not install dependencies, copy files into Skillable, capture a VM or complete a fresh-learner rehearsal.
 
 The local gateway validation does not require provisioning Azure SQL or changing the SRE resources. Any separate live DB-assessment exercise still needs its agreed database/context and CLI capability; an inferred data model is not a live database check.
+
+**Azure SQL readiness screenshot (November 5, 2026):** Step 1 of the learner guide shows `img/modernization/lab720-azure-sql-readiness.png`. The lab image is unchanged, because it has Modernize 1.0.62 and no SQL Server. The report was generated outside the VM:
+
+- **Source:** the `evaluate-offline-sql-migration-readiness` skill scripts from Modernize CLI 1.0.91 and its published SqlAssessment package.
+- **Database:** `CaldovaBankDB`, built from the Zava bank SQL scripts with Caldova names, on SQL Server 2022 Developer in Docker. Hostname `sqlserver`, limited to 2 CPUs and 4 GB.
+- **Sizing:** config-based. Container CPU and memory drive the recommended SKUs and costs.
+- **Scripts:** run on macOS with PowerShell 7. Only the Windows host check and the Windows file-ACL helper were patched; readiness, SKU and report logic were not changed.
+
+This is not a full `modernize assess` run. To regenerate on Windows, run the 1.0.91 skill against the same database.

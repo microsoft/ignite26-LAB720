@@ -132,9 +132,15 @@ This lab uses a prepared assessment. Do not run a new assessment or change the a
 
    To search a file, press **Ctrl+F**.
 
-These are application-code findings, **not a live database assessment**. An inferred data model does not prove that tables or seed data exist, that a connection works, or that a migration completed. Use the facts and source when a topology graph omits a relationship.
+4. Review the Azure SQL readiness result for the Caldova database (`CaldovaBankDB`). The facilitator ran this SQL Server assessment before the lab, so it is not in the VM. Read it here:
 
-**Before you continue:** Note why the gateway comes first and two database-connection risks its plan must address.
+   ![Azure SQL migration assessment report for CaldovaBankDB. Azure SQL Database, Azure SQL Managed Instance and SQL Server on Azure VM all show Ready, with 0 issues and 0 warnings. Azure SQL Database is recommended.](../img/modernization/lab720-azure-sql-readiness.png)
+
+   Check that all three Azure SQL targets show **Ready** with 0 issues and 0 warnings, and that **Azure SQL Database** is the recommended target. The costs are estimates based on default assumptions because no performance data was collected.
+
+The facts in step 3 come from application code, and the readiness result comes from the database schema. Neither proves that a connection works or that a migration completed. Use the facts and source when a topology graph omits a relationship.
+
+**Before you continue:** Note why the gateway comes first, two database-connection risks its plan must address, and the Azure SQL target the readiness report recommends.
 
 ---
 
