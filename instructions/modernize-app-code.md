@@ -134,9 +134,13 @@ This lab uses a prepared assessment. Do not run a new assessment or change the a
 
 4. Review the Azure SQL readiness result for the Caldova database (`CaldovaBankDB`). The facilitator ran this SQL Server assessment before the lab, so it is not in the VM. Read it here:
 
-   ![Azure SQL migration assessment report for CaldovaBankDB. Azure SQL Database, Azure SQL Managed Instance and SQL Server on Azure VM all show Ready, with 0 issues and 0 warnings. Azure SQL Database is recommended.](../img/modernization/lab720-azure-sql-readiness.png)
+   The report identifies the SQL Server as `sqlserver` and shows one database assessed; that database is `CaldovaBankDB`.
 
-   Check that all three Azure SQL targets show **Ready** with 0 issues and 0 warnings, and that **Azure SQL Database** is the recommended target. The costs are estimates based on default assumptions because no performance data was collected.
+   ![Azure SQL migration assessment report overview. The assessed SQL Server is named sqlserver and one database is assessed. Azure SQL Database is highlighted as the recommended target.](../img/modernization/lab720-azure-sql-readiness-overview.png)
+
+   ![Azure SQL readiness findings and estimated configurations for Azure SQL Database, Azure SQL Managed Instance and SQL Server on Azure VM. All targets show Ready, with zero issues and zero warnings.](../img/modernization/lab720-azure-sql-readiness.png)
+
+   Check that all three Azure SQL targets show **Ready** with 0 issues and 0 warnings, and that **Azure SQL Database** is the recommended target. The monthly costs are estimates based on this report's configuration assumptions; no live performance data was collected. They are separate from the cost estimate in the prepared application assessment, so compare readiness and target recommendations rather than the dollar amounts.
 
 The facts in step 3 come from application code, and the readiness result comes from the database schema. Neither proves that a connection works or that a migration completed. Use the facts and source when a topology graph omits a relationship.
 
