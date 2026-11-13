@@ -8,7 +8,7 @@ Read an application assessment, start a rulebook-guided modernization, and check
 | Plan | 12 minutes | Load shared rules, start a plan, and review the prepared plan |
 | Execute and verify | 25 minutes | Start execution and check prepared code, tests, and routes |
 
-This is the **45-minute .NET track** for **Caldova Bank**. Under `C:\lab\caldova\modules`, each exercise has a `start` folder (before) and a `finish` folder (prepared after). A separate `final\dotnet` snapshot shows the validated three-application end state. Do not replace the deliberately flawed `finish` review example with `final`.
+This is the **45-minute .NET track** for **Caldova Bank**. Under **C:\lab\caldova\modules**, each exercise has a **start** folder (before) and a **finish** folder (prepared after). A separate **final\dotnet** snapshot shows the validated three-application end state. Do not replace the deliberately flawed **finish** review example with **final**.
 
 Start the slow agent work, then inspect the prepared result instead of waiting. Keep a short notes file: distinguish **my run**, **prepared example**, **pending**, and **not run**.
 
@@ -28,12 +28,18 @@ Continue in the assigned VM after **Start > GitHub and Copilot** in the lab manu
    modernize --version
    ```
 
-2. Only if GitHub CLI is signed out, keep the lab's Enterprise SSO page open in the VM browser and run `gh auth login`. Choose **GitHub.com > Login with a web browser**, complete the one-time-code prompt, and authorize the expected GitHub CLI request. The browser, VS Code and `gh` have separate sessions even though they use the same assigned identity.
-3. Use **Auto** in VS Code. Every Modernize command below also passes **`--model auto`**; the VS Code model picker does not set the CLI model.
+2. Only if GitHub CLI is signed out, keep the lab's Enterprise SSO page open in the VM browser and run:
+
+   ```powershell
+   gh auth login
+   ```
+
+   Use the arrow keys to move and **Enter** to confirm. Choose **GitHub.com > Login with a web browser**, complete the one-time-code prompt, and authorize the expected GitHub CLI request. The browser, VS Code and GitHub CLI have separate sessions even though they use the same assigned identity.
+3. Use **Auto** in VS Code. Every Modernize command below also passes **--model auto**; the VS Code model picker does not set the CLI model.
 
 **Command entry:** Focus the PowerShell prompt inside the VM before using Skillable's **Type** button or pasting. Wait until the whole command appears, then press **Enter inside the VM**. For a multiline-paste warning, check the text and select **Paste anyway** only for the expected lab command. Trust only the supplied lab workspace when VS Code asks.
 
-**Before you continue:** The folder check is `True`, `gh auth status` succeeds, and the CLI is available. If a tool or folder is missing, ask the facilitator; do not install software, change permissions or switch to a personal account.
+**Before you continue:** The folder check returns **True**, **gh auth status** succeeds, and the CLI is available. If a tool or folder is missing, ask the facilitator; do not install software, change permissions or switch to a personal account.
 
 ---
 
@@ -59,10 +65,10 @@ Identify the **provider** (the service other applications call) before its **con
    C:\lab\caldova\modules\module-01-assess\start\.github\modernize\assessment-prebuilt
    ```
 
-   Open the actual `reports-...` folder, then `index.html`. If Windows asks which app to use, select **Microsoft Edge > Just once**. A notation such as `reports-<timestamp>` means the real folder, not literal angle brackets.
+   Open the actual **reports-...** folder (its name ends with a timestamp), then **index.html**. If Windows asks which app to use, select **Microsoft Edge > Just once**.
 
-3. Review the portfolio, then open `repos\ZavaAuthGateway` inside that report folder. The historical **Zava** names correspond to the **Caldova** applications in your working folders; do not rename the report files.
-4. Open `facts\data-architecture.md` and `facts\configuration-inventory.md` there. Find `System.Data.SqlClient`, SQL-login settings (`DB_USER`/`DB_PASSWORD`), and certificate-validation settings.
+3. Review the portfolio, then open **repos\ZavaAuthGateway** inside that report folder. The historical **Zava** names correspond to the **Caldova** applications in your working folders; do not rename the report files.
+4. Open **facts\data-architecture.md** and **facts\configuration-inventory.md** there. Find **System.Data.SqlClient**, SQL-login settings (**DB_USER** and **DB_PASSWORD**), and certificate-validation settings.
 
 These are application-code findings, **not a live database assessment**. An inferred data model does not prove that tables or seed data exist, that a connection works, or that a migration completed. Use the facts and source when a topology graph omits a relationship.
 
@@ -86,18 +92,11 @@ All learners use the same [Caldova workshop rulebook](https://github.com/ayangup
    Get-Content .github\modernize\config.json
    ```
 
-2. Skim the local reading copies in `rulebook`: `charter.md`, `policies.md` and `targets.md`. In the configuration, confirm the entries below. This JSON is for comparison, **not a PowerShell command**:
+2. Skim the local reading copies in the **rulebook** folder: **charter.md**, **policies.md** and **targets.md**. In the configuration, confirm that **feature_flags.rulebook** is **true** and that **portfolio_url** is **https://github.com/ayangupt/ignite26-caldova-rulebook**. Do not type or paste these values into a terminal.
 
-   ```json
-   {
-     "feature_flags": { "rulebook": true },
-     "portfolio_url": "https://github.com/ayangupt/ignite26-caldova-rulebook"
-   }
-   ```
+   The config must be in the **working directory where Modernize starts**. These exercises run it from the module root. A VS Code/app-root launch needs its own supplied configuration. A local **rulebook** folder alone does not demonstrate native loading.
 
-   The config must be in the **working directory where Modernize starts**. These exercises run it from the module root. A VS Code/app-root launch needs its own supplied configuration. A local `rulebook` folder alone does not demonstrate native loading.
-
-3. If the gateway already has **.github > skills > pii-masking**, inspect its `SKILL.md` instead of making a nested copy. Otherwise, copy the PII skill once from the planning module root:
+3. If the gateway already has **.github > skills > pii-masking**, inspect its **SKILL.md** instead of making a nested copy. Otherwise, copy the PII skill once from the planning module root:
 
    ```powershell
    New-Item -ItemType Directory -Force -Path apps\CaldovaAuthGateway\.github\skills | Out-Null
@@ -128,13 +127,13 @@ Start a live gateway plan, then use the prepared plan while it runs.
    C:\lab\caldova\modules\module-02-plan\start\apps\CaldovaAuthGateway
    ```
 
-   Replace the default plan name with **`caldova-dotnet-modernization`**. At the goal prompt, press **Ctrl+V** to paste the goal. Answer clarifying questions using the shared rules; do not accept provisioning or deployment.
+   Replace the default plan name with **caldova-dotnet-modernization**. At the goal prompt, press **Ctrl+V** to paste the goal. Answer clarifying questions using the shared rules; do not accept provisioning or deployment.
 
-3. Look for **`Rulebook loaded (3 files)`**, then leave the run open. When a live plan finishes, its folder should also contain `rulebook-compliance.md` and `.metadata\rulebook-metadata.json`; check the metadata's source URL. The loading message is evidence that the CLI read the rules, not that the resulting code complies.
+3. Look for **Rulebook loaded (3 files)**, then leave the run open. When a live plan finishes, its folder should also contain **rulebook-compliance.md** and **.metadata\rulebook-metadata.json**; check the metadata's source URL. The loading message is evidence that the CLI read the rules, not that the resulting code complies.
 
 ![CLI reports SUCCESS: Rulebook loaded (3 files)](../img/modernization/caldova-rulebook-loaded.png)
 
-*Expected CLI message: `SUCCESS: Rulebook loaded (3 files)`.*
+*Expected CLI message: **SUCCESS: Rulebook loaded (3 files)**.*
 
 4. In **another PowerShell terminal**, select the prepared branch before opening the example:
 
@@ -144,13 +143,13 @@ Start a live gateway plan, then use the prepared plan while it runs.
    code apps\CaldovaAuthGateway
    ```
 
-   In Explorer, open `.github > modernize > caldova-dotnet-modernization > plan.md` and use **Open Preview**. Open `.metadata\tasks.json` and any supplied `rulebook-compliance.md` alongside it. The prepared plan is on `modernization/dotnet`, not `main`; its reports describe a rehearsal, not today's execution. If a report is missing, record that gap rather than create substitute evidence.
+   In Explorer, open **.github > modernize > caldova-dotnet-modernization > plan.md** and use **Open Preview**. Open **.metadata\tasks.json** and any supplied **rulebook-compliance.md** alongside it. The prepared plan is on the **modernization/dotnet** branch, not **main**; its reports describe a rehearsal, not today's execution. If a report is missing, record that gap rather than create substitute evidence.
 
 ![1: Open plan.md and its compliance report. 2: Find the .NET 10 target. 3: Check managed-identity database access.](../img/guide-annotations/annotated/caldova-plan-review-annotated-bca49df6c11b.png)
 
 *1. Open the plan and compliance report. 2. Find the .NET 10 target. 3. Check the managed-identity requirement.*
 
-5. Match the rules to tasks: .NET 10; managed-identity database access; validated TLS; no PII in logs; supported libraries; compatible public routes and `/WhoAmI.ashx`; health checks and a compliant Dockerfile.
+5. Match the rules to tasks: .NET 10; managed-identity database access; validated TLS; no PII in logs; supported libraries; compatible public routes including **/WhoAmI.ashx**; health checks and a compliant Dockerfile.
 
 **Before you continue:** You can explain how the plan covers the rules and where the PII skill is used. If the live plan is slow, record **pending** and continue. If native loading fails, stop that run, tell the facilitator and review the prepared results instead.
 
@@ -171,11 +170,11 @@ Run the remaining gateway tasks from the separate execution workspace, not from 
    Get-Content .github\modernize\config.json
    ```
 
-2. Confirm this working directory has the same shared-rulebook settings from step 2. In the gateway plan's `.metadata\tasks.json`, the runtime-upgrade and Web Forms-conversion tasks should already show `"status": "success"`. They are **prepared starting state**, not work you just performed.
+2. Confirm this working directory has the same shared-rulebook settings from step 2. In the gateway plan's **.metadata\tasks.json**, the runtime-upgrade and Web Forms-conversion tasks should already show a status of **success**. They are **prepared starting state**, not work you just performed.
 
 ![1: Locate .metadata/tasks.json. 2: Task 001 runtime upgrade has status success. 3: Task 002 Web Forms conversion has status success.](../img/guide-annotations/annotated/caldova-task-states-annotated-918df22654f4.png)
 
-*1. Locate `tasks.json`. 2-3. Confirm `success` for the runtime upgrade and Web Forms conversion.*
+*1. Locate **tasks.json**. 2-3. Confirm **success** for the runtime upgrade and Web Forms conversion.*
 
 3. Use the CLI route below for this shortened lab; do not start a second IDE execution:
 
@@ -187,7 +186,7 @@ Run the remaining gateway tasks from the separate execution workspace, not from 
      --no-tty
    ```
 
-**Before you continue:** Check for **`Rulebook loaded (3 files)`** in this execution too. If it is absent, stop and ask the facilitator; do not assume the planning workspace's settings carried over. Otherwise leave the terminal running and move on **without waiting**. If task states or tools differ, use the prepared review and mark execution **not run**.
+**Before you continue:** Check for **Rulebook loaded (3 files)** in this execution too. If it is absent, stop and ask the facilitator; do not assume the planning workspace's settings carried over. Otherwise leave the terminal running and move on **without waiting**. If task states or tools differ, use the prepared review and mark execution **not run**.
 
 ---
 
@@ -206,16 +205,16 @@ Inspect the prepared result for faults that a successful build or agent response
    ```
 
 2. Find the ASP.NET Core replacement for the old Web Forms code. Compare its database settings and public routes with the rulebook.
-3. Identify two gaps: the portal's legacy `FROM mono:6.12` base image, and how it recognizes users through the gateway's `/WhoAmI.ashx` response. A green build does not prove this sign-in contract works.
+3. Identify two gaps: the portal's legacy **FROM mono:6.12** base image, and how it recognizes users through the gateway's **/WhoAmI.ashx** response. A green build does not prove this sign-in contract works.
 4. Spend about four minutes on the **separate** final state:
 
    ```powershell
    code C:\lab\caldova\modules\module-03-execute\final\dotnet
    ```
 
-   Confirm the three apps target .NET 10; compare the portal's Microsoft-based, non-root Dockerfile; and read `VALIDATION.md`. This frozen snapshot's evidence is not output from your current agent run. Do not rerun its full SQL-backed suite, rebuild containers or deploy during this lab.
+   Confirm the three apps target .NET 10; compare the portal's Microsoft-based, non-root Dockerfile; and read **VALIDATION.md**. This frozen snapshot's evidence is not output from your current agent run. Do not rerun its full SQL-backed suite, rebuild containers or deploy during this lab.
 
-**Before you continue:** Note the review gaps and how the final snapshot addresses them. Keep Azure access, signed-in behavior and any new-rulebook execution separate from that historical evidence. Do not overwrite `finish` with `final`.
+**Before you continue:** Note the review gaps and how the final snapshot addresses them. Keep Azure access, signed-in behavior and any new-rulebook execution separate from that historical evidence. Do not overwrite **finish** with **final**.
 
 ---
 
@@ -235,9 +234,9 @@ Build, test and run the **prepared gateway** locally. Apply the same checks to y
 
 ![1: Build succeeded. 2: The test summary shows zero failed tests and 13 succeeded.](../img/guide-annotations/annotated/caldova-build-tests-annotated-1225a17c2c50.png)
 
-*1. Look for `Build succeeded`. 2. Check `failed: 0` in the test summary.*
+*1. Look for **Build succeeded**. 2. Check **failed: 0** in the test summary.*
 
-2. Inspect the code for an SDK-style .NET 10 project; `Microsoft.Data.SqlClient` with identity-based authentication and validated TLS; structured logs using PII masking; and preserved public routes.
+2. Inspect the code for an SDK-style .NET 10 project; **Microsoft.Data.SqlClient** with identity-based authentication and validated TLS; structured logs using PII masking; and preserved public routes.
 3. Run without a database, using local-only placeholders:
 
    ```powershell
@@ -254,13 +253,13 @@ Build, test and run the **prepared gateway** locally. Apply the same checks to y
    curl.exe -i http://localhost:8080/WhoAmI.ashx
    ```
 
-   Expect HTTP 200 and `{"authenticated":false}` from `/WhoAmI.ashx`. Stop the app with **Ctrl+C** in its server terminal.
+   Expect HTTP 200 and the response **{"authenticated":false}** from **/WhoAmI.ashx**. Stop the app with **Ctrl+C** in its server terminal.
 
 ![1: The health response is OK with HTTP 200. 2: WhoAmI returns authenticated false with HTTP 200.](../img/guide-annotations/annotated/caldova-local-routes-annotated-bf363029221e.png)
 
-*1. `/health`: HTTP 200 and `OK`. 2. `/WhoAmI.ashx`: HTTP 200 and `{"authenticated":false}`.*
+*1. **/health**: HTTP 200 and **OK**. 2. **/WhoAmI.ashx**: HTTP 200 and **{"authenticated":false}**.*
 
-5. If your live execution finished, repeat the checks in its gateway under `module-03-execute\start`. If it is still running, record **pending**; if skipped, record **not run**. Do not launch a duplicate.
+5. If your live execution finished, repeat the checks in its gateway under **module-03-execute\start**. If it is still running, record **pending**; if skipped, record **not run**. Do not launch a duplicate.
 
 **Before you continue:** Record your build/test and route results separately from prepared evidence. These routes do not test database-backed login or Azure telemetry delivery. The VM, Azure and TAP credentials are **not application test-user credentials**. Missing DB/app-login inputs mean **not verified**, not an invitation to guess credentials or create resources.
 
@@ -283,10 +282,10 @@ If you used the review-only fallback, say so; it does not complete the live hand
 | Symptom | Next action |
 |---|---|
 | Lab folder or tool missing | Ask the facilitator; do not install or use personal access |
-| CLI rejects the model | Confirm the command includes `--model auto`; VS Code's picker is separate |
-| Rulebook not loaded | Check the actual working-directory config, shared URL and `gh auth status`; stop live work and ask the facilitator |
+| CLI rejects the model | Confirm the command includes **--model auto**; VS Code's picker is separate |
+| Rulebook not loaded | Check the actual working-directory config, shared URL and **gh auth status**; stop live work and ask the facilitator |
 | Agent takes too long | Review the prepared result and record your run as pending |
-| Git output fills the terminal | Press `q` if a pager opened; use the documented `--no-pager` commands |
+| Git output fills the terminal | Press **q** if a pager opened; use the documented **--no-pager** commands |
 | Build passes but login fails | Inspect the gateway/portal contract and required DB/app-user setup |
 
 ### Reference: CLI alternatives
@@ -317,6 +316,6 @@ modernize plan create (Get-Content goals\dotnet.txt -Raw) `
   --no-tty
 ```
 
-The shared workshop rulebook baseline is **1.0**, commit `5564f81d46c25830910e44dea27a32f32720dabc`. Rulebook publication and loading do not establish application compliance.
+The shared workshop rulebook baseline is **1.0**, commit **5564f81d46c25830910e44dea27a32f32720dabc**. Rulebook publication and loading do not establish application compliance.
 
 The full PREL38 pre-day lab includes the live assessment and Java alternative; neither is an extra task in this .NET-only section.
