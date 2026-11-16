@@ -129,21 +129,16 @@ Start a live gateway plan, then use the prepared plan while it runs.
 
    Replace the default plan name with **caldova-dotnet-modernization**. At the goal prompt, press **Ctrl+V** to paste the goal. Answer clarifying questions using the shared rules; do not accept provisioning or deployment.
 
-3. Look for **Rulebook loaded (3 files)**, then leave the run open. When a live plan finishes, its folder should also contain **rulebook-compliance.md** and **.metadata\rulebook-metadata.json**; check the metadata's source URL. The loading message is evidence that the CLI read the rules, not that the resulting code complies.
+3. Leave the run going and continue to item 4. You check for the rulebook message in step 4, after the run has had time to load the rules.
 
-![CLI reports SUCCESS: Rulebook loaded (3 files)](../img/modernization/caldova-rulebook-loaded.png)
-
-*Expected CLI message: **SUCCESS: Rulebook loaded (3 files)**.*
-
-4. In **another PowerShell terminal**, select the prepared branch before opening the example:
+4. In **another PowerShell terminal**, open the prepared example:
 
    ```powershell
    cd C:\lab\caldova\modules\module-03-execute\start
-   git switch modernization/dotnet
    code apps\CaldovaAuthGateway
    ```
 
-   In Explorer, open **.github > modernize > caldova-dotnet-modernization > plan.md** and use **Open Preview**. Open **.metadata\tasks.json** and any supplied **rulebook-compliance.md** alongside it. The prepared plan is on the **modernization/dotnet** branch, not **main**; its reports describe a rehearsal, not today's execution. If a report is missing, record that gap rather than create substitute evidence.
+   In Explorer, open **.github > modernize > caldova-dotnet-modernization > plan.md** and use **Open Preview**. Open **.metadata\tasks.json** and any supplied **rulebook-compliance.md** alongside it. This prepared plan is already in the local folder; you do not need any Git commands. Its reports describe a rehearsal, not today's execution. If **plan.md** is missing, tell the facilitator. If a report is missing, record that gap rather than create substitute evidence.
 
 ![1: Open plan.md and its compliance report. 2: Find the .NET 10 target. 3: Check managed-identity database access.](../img/guide-annotations/annotated/caldova-plan-review-annotated-bca49df6c11b.png)
 
@@ -151,7 +146,7 @@ Start a live gateway plan, then use the prepared plan while it runs.
 
 5. Match the rules to tasks: .NET 10; managed-identity database access; validated TLS; no PII in logs; supported libraries; compatible public routes including **/WhoAmI.ashx**; health checks and a compliant Dockerfile.
 
-**Before you continue:** You can explain how the plan covers the rules and where the PII skill is used. If the live plan is slow, record **pending** and continue. If native loading fails, stop that run, tell the facilitator and review the prepared results instead.
+**Before you continue:** You can explain how the plan covers the rules and where the PII skill is used. Leave the live plan running; you check its rulebook message in step 4.
 
 ---
 
@@ -161,22 +156,28 @@ Start a live gateway plan, then use the prepared plan while it runs.
 
 Run the remaining gateway tasks from the separate execution workspace, not from your still-running plan.
 
-1. If your live planning run is still active, stop it with **Ctrl+C** in its own terminal. In the execution terminal:
+1. Go back to the live planning terminal and scroll up through its output. Look for **SUCCESS: Rulebook loaded (3 files)**:
+
+   ![CLI reports SUCCESS: Rulebook loaded (3 files)](../img/modernization/caldova-rulebook-loaded.png)
+
+   *Expected CLI message: **SUCCESS: Rulebook loaded (3 files)**.*
+
+   This message is evidence that the CLI read the rules, not that the resulting code complies. When a live plan finishes, its folder should also contain **rulebook-compliance.md** and **.metadata\rulebook-metadata.json**; check the metadata's source URL. If the message has not appeared yet, record **pending**. If the run shows an error instead, record live planning as **not run** and tell the facilitator. Your plan stays in its local folder.
+
+2. If your live planning run is still active, stop it with **Ctrl+C** in its own terminal. In the execution terminal:
 
    ```powershell
    cd C:\lab\caldova\modules\module-03-execute\start
-   git switch modernization/dotnet
-   git --no-pager log --oneline
    Get-Content .github\modernize\config.json
    ```
 
-2. Confirm this working directory has the same shared-rulebook settings from step 2. In the gateway plan's **.metadata\tasks.json**, the runtime-upgrade and Web Forms-conversion tasks should already show a status of **success**. They are **prepared starting state**, not work you just performed.
+3. Confirm this working directory has the same shared-rulebook settings from step 2. In the gateway plan's **.metadata\tasks.json**, the runtime-upgrade and Web Forms-conversion tasks should already show a status of **success**. They are **prepared starting state**, not work you just performed.
 
 ![1: Locate .metadata/tasks.json. 2: Task 001 runtime upgrade has status success. 3: Task 002 Web Forms conversion has status success.](../img/guide-annotations/annotated/caldova-task-states-annotated-918df22654f4.png)
 
 *1. Locate **tasks.json**. 2-3. Confirm **success** for the runtime upgrade and Web Forms conversion.*
 
-3. Use the CLI route below for this shortened lab; do not start a second IDE execution:
+4. Use the CLI route below for this shortened lab; do not start a second IDE execution:
 
    ```powershell
    modernize plan execute "Execute all remaining tasks, starting with the first unfinished task. Do not stop after one task. Do not run the deployment task, provision resources, grant access, push changes or install tools." `
@@ -200,9 +201,10 @@ Inspect the prepared result for faults that a successful build or agent response
 
    ```powershell
    cd C:\lab\caldova\modules\module-03-execute\finish
-   git switch modernization/dotnet
-   git --no-pager diff --stat main -- apps/CaldovaLoanPortal
+   code apps\CaldovaLoanPortal
    ```
+
+   The finished result is already in this local folder; you do not need any Git commands.
 
 2. Find the ASP.NET Core replacement for the old Web Forms code. Compare its database settings and public routes with the rulebook.
 3. Identify two gaps: the portal's legacy **FROM mono:6.12** base image, and how it recognizes users through the gateway's **/WhoAmI.ashx** response. A green build does not prove this sign-in contract works.
@@ -285,7 +287,7 @@ If you used the review-only fallback, say so; it does not complete the live hand
 | CLI rejects the model | Confirm the command includes **--model auto**; VS Code's picker is separate |
 | Rulebook not loaded | Check the actual working-directory config, shared URL and **gh auth status**; stop live work and ask the facilitator |
 | Agent takes too long | Review the prepared result and record your run as pending |
-| Git output fills the terminal | Press **q** if a pager opened; use the documented **--no-pager** commands |
+| Prepared **plan.md** or results missing | Ask the facilitator; do not run Git commands to find them |
 | Build passes but login fails | Inspect the gateway/portal contract and required DB/app-user setup |
 
 ### Reference: CLI alternatives
