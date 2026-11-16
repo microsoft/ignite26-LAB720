@@ -138,7 +138,7 @@ Start a live gateway plan, then use the prepared plan while it runs.
    code apps\CaldovaAuthGateway
    ```
 
-   In Explorer, open **.github > modernize > caldova-dotnet-modernization > plan.md** and use **Open Preview**. Open **.metadata\tasks.json** and any supplied **rulebook-compliance.md** alongside it. This prepared plan is already in the local folder; you do not need any Git commands. Its reports describe a rehearsal, not today's execution. If **plan.md** is missing, tell the facilitator. If a report is missing, record that gap rather than create substitute evidence.
+   In Explorer, open **.github > modernize > caldova-dotnet-modernization > plan.md** and use **Open Preview**. Open **.metadata\tasks.json** and any supplied **rulebook-compliance.md** alongside it. This prepared plan is already in the local folder; you do not need any Git commands. Its reports describe a rehearsal, not today's execution. If a report is missing, record that gap rather than create substitute evidence.
 
 ![1: Open plan.md and its compliance report. 2: Find the .NET 10 target. 3: Check managed-identity database access.](../img/guide-annotations/annotated/caldova-plan-review-annotated-bca49df6c11b.png)
 
@@ -287,7 +287,6 @@ If you used the review-only fallback, say so; it does not complete the live hand
 | CLI rejects the model | Confirm the command includes **--model auto**; VS Code's picker is separate |
 | Rulebook not loaded | Check the actual working-directory config, shared URL and **gh auth status**; stop live work and ask the facilitator |
 | Agent takes too long | Review the prepared result and record your run as pending |
-| Prepared **plan.md** or results missing | Ask the facilitator; do not run Git commands to find them |
 | Build passes but login fails | Inspect the gateway/portal contract and required DB/app-user setup |
 
 ### Reference: CLI alternatives
