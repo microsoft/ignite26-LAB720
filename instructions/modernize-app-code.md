@@ -189,11 +189,21 @@ Use the idle terminal where you copied the goal, or open a PowerShell tab (**+**
 code C:\lab\caldova\modules\module-02-plan\start\apps\CaldovaAuthGateway
 ```
 
-**If planning is unfinished or unavailable**, open the prepared gateway plan:
+**If planning is unfinished or unavailable**, select the supplied .NET checkpoint before opening the prepared gateway plan. This does not run planning:
 
 ```powershell
-code C:\lab\caldova\modules\module-03-execute\start\apps\CaldovaAuthGateway
+cd C:\lab\caldova\modules\module-03-execute\start
+git status --short
 ```
+
+No output means the working tree is clean. If changed or untracked files are listed, or Git reports an error, stop and ask the facilitator; do not reset, stash or discard work. Otherwise:
+
+```powershell
+git switch modernization/dotnet
+code apps\CaldovaAuthGateway
+```
+
+Confirm Git reports **modernization/dotnet**. The **main** branch does not contain this prepared plan. If the supplied branch is missing or switching fails, ask the facilitator rather than creating or copying a replacement plan.
 
 1. In the VS Code **Explorer**, open **.github > modernize > caldova-dotnet-modernization > plan.md** and use **Open Preview** (**Ctrl+Shift+V**). Open **.metadata\tasks.json** and the supplied **rulebook-compliance.md** alongside it.
 2. For a completed live plan, inspect **.metadata\rulebook-metadata.json** and confirm its source URL is the shared rulebook. Prepared reports describe a rehearsal, not your run.
@@ -212,22 +222,33 @@ code C:\lab\caldova\modules\module-03-execute\start\apps\CaldovaAuthGateway
 
 **Live execution from a prepared checkpoint**
 
-Execution uses the supplied plan and task state in **module-03-execute\start**, not your live plan in **module-02-plan\start**. Do not copy your plan between the folders.
+Execution uses the supplied plan and task state on the **modernization/dotnet** branch in **module-03-execute\start**, not your live plan in **module-02-plan\start**. Live planning does not need to have completed for this checkpoint to exist. Do not copy your plan between the folders.
 
 ### Open the execution workspace
 
-Use the idle review terminal, or open a new PowerShell tab (**+**), as your **Execution** terminal. Open this workspace even if you reviewed your live plan:
+Use the idle review terminal, or open a new PowerShell tab (**+**), as your **Execution** terminal. Open this workspace even if you reviewed your live plan. First check for existing work:
 
 ```powershell
 cd C:\lab\caldova\modules\module-03-execute\start
-Get-Content .github\modernize\config.json
-code apps\CaldovaAuthGateway
+git status --short
 ```
+
+No output means the working tree is clean. If changed or untracked files are listed, or Git reports an error, ask the facilitator and continue to step 5 with execution **not run**. Do not reset, stash or discard work.
+
+If clean, select the supplied checkpoint. It is fine if you already selected this branch for prepared-plan review in step 3:
+
+```powershell
+git switch modernization/dotnet
+Get-Content .github\modernize\config.json
+code --new-window .
+```
+
+Confirm Git reports **modernization/dotnet**, not **main**. This opens the **module root** in VS Code so both **rulebook** and **apps** are visible. Opening only **apps\CaldovaAuthGateway** hides the module-root rulebook reading copies; it does not mean the rulebook is missing.
 
 ### Check the prepared task state and configuration
 
-1. Confirm this working directory has the same shared-rulebook settings from step 2.
-2. In the VS Code window for this **execution** gateway, open **.github > modernize > caldova-dotnet-modernization > .metadata > tasks.json**. The runtime-upgrade and Web Forms-conversion tasks should already show **"status": "success"**. They are **prepared starting state**, not work you just performed.
+1. In the module-root **.github > modernize > config.json**, confirm the same shared-rulebook settings from step 2: **feature_flags.rulebook** is **true** and **portfolio_url** is **https://github.com/ayangupt/ignite26-caldova-rulebook**. The root **rulebook** folder contains the reading copies; native loading is checked after execution starts.
+2. In this VS Code window, expand **apps > CaldovaAuthGateway > .github > modernize > caldova-dotnet-modernization > .metadata > tasks.json**. The runtime-upgrade and Web Forms-conversion tasks should already show **"status": "success"**. They are **prepared starting state**, not work you just performed.
 
 ![1: Locate .metadata/tasks.json. 2: Task 001 runtime upgrade has status success. 3: Task 002 Web Forms conversion has status success.](../img/guide-annotations/annotated/caldova-task-states-annotated-918df22654f4.png)
 
@@ -389,6 +410,8 @@ Stop the local app server when finished, leave any unfinished agent work identif
 | Rulebook-loading error | Check the actual working-directory config, shared URL and **gh auth status**; stop the affected run if still active and ask the facilitator |
 | Planner appears idle | Check for an unanswered question in the **Planning** terminal; follow the rulebook rather than leaving the prompt paused |
 | Planning exceeds its timebox | Use the prepared plan. Leave unfinished planning open; if still active at step 4, skip live execution and continue to prepared review |
+| Prepared plan or tasks.json is missing | The execution workspace may still be on **main**. Follow the clean-working-tree check and select **modernization/dotnet** in step 4; do not regenerate or copy a plan |
+| Rulebook folder is not visible in VS Code | Open **module-03-execute\start**, not only its gateway app. The rulebook reading copies and launch configuration are at the module root |
 | Execution takes too long | Leave it running and use the prepared review and validation; unfinished execution is **pending** |
 | Local app cannot bind port 8080 | Do not treat another process's responses as this app's results; ask the facilitator without terminating an unknown process |
 | Build passes but login fails | Inspect the gateway/portal contract and required DB/app-user setup |
