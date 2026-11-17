@@ -1,14 +1,15 @@
 # LAB720: Modernize application code
 
-Use **Modernize app code** in the **Skillable instruction pane** for the current steps. Complete **Start > GitHub and Copilot** first, then follow this **45-minute .NET track** for Caldova Bank.
+Use **Modernize app code** in the **Skillable instruction pane** for the current steps. Complete **Start > GitHub and Copilot** first, then follow this **50-minute .NET track** for Caldova Bank.
 
 | Stage | Time | Your result |
 |---|---|---|
+| Setup and transitions | 5 minutes | Confirm sign-in and tools; allow for switching workspaces |
 | Assess | 8 minutes | Identify the sign-in provider and its database risks |
-| Plan | 12 minutes | Load shared rules, start a plan, and review the prepared plan |
-| Execute and verify | 25 minutes | Start execution and check prepared code, tests, and routes |
+| Plan | 17 minutes | Configure the rules and skill, work through live planning, and review the plan |
+| Execute and verify | 20 minutes | Start execution and check prepared code, tests, and routes |
 
-Read the prepared assessment; do not run a new assessment in this shortened lab. Start the guided planning and execution work, then inspect the prepared results instead of waiting for the agent.
+Read the prepared assessment; do not run a new assessment in this shortened lab. Work through interactive planning and review its output, using the prepared plan if generation exceeds the timebox. Start execution from a prepared checkpoint, then review and validate prepared code without waiting for execution to finish.
 
 ## Find the teaching files
 

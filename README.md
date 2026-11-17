@@ -17,7 +17,7 @@ This 75-minute hands-on lab combines application modernization and operations au
 
 The modernization section uses the shared [Caldova workshop rulebook](https://github.com/ayangupt/ignite26-caldova-rulebook). All learners use the same training baseline; creating an individual rulebook repository is not a prerequisite.
 
-Follow the [modernization guide](instructions/modernize-app-code.md) (45 minutes), then the [SRE Agent guide](instructions/sre-agent.md) (15 minutes). The [attendee instructions](instructions/README.md) index both sections.
+Follow the [modernization guide](instructions/modernize-app-code.md) (50 minutes), then the [SRE Agent guide](instructions/sre-agent.md) (15 minutes). The [attendee instructions](instructions/README.md) index both sections.
 
 ### 🚀 Getting started
 
@@ -28,7 +28,7 @@ The exercises require an assigned, prepared lab environment and lab accounts. Cl
 If you're following along during a live session:
 
 1. Use the participant access details supplied by your facilitator to open the assigned lab environment. Use the **Resources** tab for VM access and assigned account details, and open sign-in pages inside the VM.
-2. Follow **Start > GitHub and Copilot** in the lab manual, then open the [modernization guide](instructions/modernize-app-code.md). Follow the facilitator's pacing and use the prepared assessment, plan, and results rather than waiting for long-running agent steps.
+2. Follow **Start > GitHub and Copilot** in the lab manual, then open the [modernization guide](instructions/modernize-app-code.md). Follow the facilitator's pacing through live planning, using a prepared plan if it exceeds the timebox. Start execution from the prepared checkpoint, then review and validate prepared code without waiting for execution to finish.
 3. Continue to the [SRE Agent guide](instructions/sre-agent.md) or **SRE Agent** in the lab manual. Reuse the assigned VM and accounts, but use that module's Caldova Retail Co. repository and Azure resource names rather than the Caldova Bank workload.
 
 #### On your own
@@ -36,7 +36,7 @@ If you're following along during a live session:
 If you're learning at your own pace:
 
 1. Confirm access to the assigned lab environment and complete lab manual with the lab provider. The exercises depend on its VM, prepared files, and assigned GitHub and Azure accounts; repository access alone is not enough.
-2. Follow [Modernize application code with GitHub Copilot](instructions/modernize-app-code.md), beginning with **Get ready**. Work through each checkpoint, use the prepared results while live work runs, and record any checks or tasks that remain unverified.
+2. Follow [Modernize application code with GitHub Copilot](instructions/modernize-app-code.md), beginning with **Get ready**. Work through live planning and plan review, then use the prepared execution checkpoint and code for review and validation. Keep live results separate from prepared evidence and identify any checks that remain unverified.
 3. Follow [Automate operations with Azure SRE Agent](instructions/sre-agent.md) for the operations exercises. Keep the two workloads separate and verify the customer-visible result of the search investigation.
 
 ### 🎯 Learning outcomes

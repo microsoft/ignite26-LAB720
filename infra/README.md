@@ -28,7 +28,7 @@ The shared `caldova-rehearsal.zip` contains a root `caldova/README.md` headed **
 
 During owner-approved LAB720 image preparation, use [lab-root-README.md](lab-root-README.md) as `C:\lab\caldova\README.md`. Inspect the existing file first and preserve any newer authored changes; retain the inherited PREL38 README separately as reference rather than deleting it. Change only this top-level entry point, not the original archive, module repositories, prepared branches, assessment reports or frozen final snapshot.
 
-The replacement directs learners to **Modernize app code** in Skillable and repeats the established LAB720 8/12/25-minute, .NET-only flow. Confirm those values agree with the assigned manual on a fresh learner launch. A repository update alone does not replace the README already stored in the shared VM image; an authorized guest-file update and image capture are needed for future launches to receive it.
+The replacement directs learners to **Modernize app code** in Skillable and repeats the LAB720 50-minute, .NET-only flow: 5 minutes for setup/transitions, 8 for assessment, 17 for rulebook setup and planning, and 20 for execution and validation. Confirm those values agree with the assigned manual on a fresh learner launch. A repository update alone does not replace the README already stored in the shared VM image; an authorized guest-file update and image capture are needed for future launches to receive it.
 
 ### Verify the configured image
 
