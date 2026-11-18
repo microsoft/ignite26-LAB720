@@ -288,14 +288,21 @@ Inspect the prepared result for faults that a successful build or agent response
 
 ### Inspect the prepared portal
 
-1. Leave any live execution running. Open another PowerShell tab (**+**) as your **Validation** terminal:
+1. Leave any live execution running. Open another PowerShell tab (**+**) as your **Validation** terminal. The **finish** folder is a separate Git checkout: selecting a branch in **start** in step 4 does not change it. Check for existing work before selecting its supplied .NET result:
 
    ```powershell
    cd C:\lab\caldova\modules\module-03-execute\finish
+   git status --short
+   ```
+
+   No output means the working tree is clean. If changed or untracked files are listed, or Git reports an error, stop and ask the facilitator; do not reset, stash or discard work. Otherwise:
+
+   ```powershell
+   git switch modernization/dotnet
    code apps\CaldovaLoanPortal
    ```
 
-   The prepared result is already in this local folder; no Git commands are needed.
+   Confirm Git reports **modernization/dotnet**. The prepared result is on this local branch, not **main**. If the branch is missing or switching fails, stop and ask the facilitator. Do not generate a replacement or copy **final** over this deliberately flawed review example.
 
 2. Find the ASP.NET Core replacement for the old Web Forms code. Compare its database settings and public routes with the rulebook.
 3. Press **Ctrl+Shift+F** in VS Code and inspect these review targets:
@@ -327,10 +334,19 @@ Build, test and run the **prepared gateway** locally. Apply the same checks to y
 
 ### Build, test, and inspect the gateway
 
-In the **Validation** terminal, build and run the test project:
+In the **Validation** terminal, confirm you are using the prepared **finish** checkout on **modernization/dotnet**, not **main** or the live **start** checkout:
 
 ```powershell
 cd C:\lab\caldova\modules\module-03-execute\finish\apps\CaldovaAuthGateway
+git branch --show-current
+Test-Path Tests\CaldovaAuthGateway.Tests.csproj
+```
+
+Expect **modernization/dotnet** and **True**. If you skipped step 5 or see **main**, follow step 5's clean-working-tree check and branch selection in **finish** first. If the test project is still missing, stop and ask the facilitator; do not install extra SDKs or create a replacement project.
+
+Only when both checks match, build and run the test project:
+
+```powershell
 dotnet build
 dotnet test Tests\CaldovaAuthGateway.Tests.csproj
 ```
@@ -412,6 +428,7 @@ Stop the local app server when finished, leave any unfinished agent work identif
 | Planning exceeds its timebox | Use the prepared plan. Leave unfinished planning open; if still active at step 4, skip live execution and continue to prepared review |
 | Prepared plan or tasks.json is missing | The execution workspace may still be on **main**. Follow the clean-working-tree check and select **modernization/dotnet** in step 4; do not regenerate or copy a plan |
 | Rulebook folder is not visible in VS Code | Open **module-03-execute\start**, not only its gateway app. The rulebook reading copies and launch configuration are at the module root |
+| Step 6 reports an OutputPath build error or MSB1009 for the test project | The separate **finish** checkout may still be on **main**, which contains the legacy app. Follow step 5's clean-working-tree check and select **modernization/dotnet** in **finish**, then repeat step 6's preflight checks |
 | Execution takes too long | Leave it running and use the prepared review and validation; unfinished execution is **pending** |
 | Local app cannot bind port 8080 | Do not treat another process's responses as this app's results; ask the facilitator without terminating an unknown process |
 | Build passes but login fails | Inspect the gateway/portal contract and required DB/app-user setup |
