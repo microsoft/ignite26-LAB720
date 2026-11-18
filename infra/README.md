@@ -26,6 +26,8 @@ The review workspace at `C:\lab\caldova\modules\module-03-execute\finish` is a s
 
 Do not alter the deliberately flawed `finish` review example or the frozen `final\dotnet` files, rulebook copies and manifest to make historical evidence appear newly validated.
 
+The final comparison uses `C:\lab\caldova\modules\module-03-execute\final\dotnet\VALIDATION.md`. Verify that this existing, nonempty report is at the snapshot root beside `README.md`, `manifest.json` and `apps`; it is not a report learners generate in `start` or `finish`. Follow step 5's file-existence check and VS Code command on a fresh learner launch. If the packaged report is missing, restore the approved snapshot through the image-preparation process; do not fabricate validation evidence or create an empty file to satisfy the instructions.
+
 ### Use the LAB720 entry point
 
 The shared `caldova-rehearsal.zip` contains a root `caldova/README.md` headed **PREL38 Part 2**, with a 15/15/30-minute schedule. Extracting that archive into `C:\lab` places the longer pre-day walkthrough at `C:\lab\caldova\README.md`. That file is separate from the current LAB720 Skillable manual and can send attendees to the wrong timing and track.
@@ -43,6 +45,8 @@ On a fresh LAB720 launch, confirm the required tools, package access and assigne
 Also rehearse the prepared-plan fallback without generating a live plan. Follow the participant guide's clean-working-tree check and `git switch modernization/dotnet` in the execution workspace. Verify the prepared task states and both launch-directory configs after switching. Step 4 opens the module root so the `rulebook` reading copies and `apps` folder are visible together; validate the documented Explorer path from that view.
 
 Follow steps 5 and 6 in the separate `finish` checkout, including its own clean-working-tree check and branch selection. Confirm the test project exists, run the documented build and tests, then start the gateway with the local-only environment variables. Verify HTTP 200 from `/health` and `/WhoAmI.ashx`, with `{"authenticated":false}` from the latter, and stop only the app started for this check. A successful build in `start` or the frozen `final` snapshot does not validate this learner path.
+
+The optional live-result checks require successful local execution and an actual test project in `start`. The supplied `start` checkpoint does not contain `Tests\CaldovaAuthGateway.Tests.csproj`; verify the live run's output rather than treating a stopped command or the prepared tests as proof of completion.
 
 Keep shared-image promotion coordinated with the other module owners. Merging this configuration file or the documentation PR does not install dependencies, copy files into Skillable, capture a VM or complete a fresh-learner rehearsal.
 
