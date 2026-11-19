@@ -177,7 +177,7 @@ The message confirms that the CLI read the shared rules; it does not mean the pl
 3. Wait within the time allocation for **SUCCESS: Rulebook compliance report: ...rulebook-compliance.md** and the **How would you like to continue?** menu.
 4. Select **Return to main menu**, then **Esc** to return to PowerShell. **Do not accept the default Execute modernization plan option.** Step 4 uses a separate prepared checkpoint.
 
-**If planning exceeds the timebox:** Check for an unanswered question; do not mistake a paused prompt for active generation. Answer it against the rulebook if possible, then leave unfinished planning open and review the prepared plan below. Do not wait beyond the allocation. If planning is still active when you reach step 4, skip live execution and continue with prepared review and validation; live execution is **not run**. You can check the planning result near the end.
+**If planning exceeds the timebox:** Check for an unanswered question; do not mistake a paused prompt for active generation. Answer it against the rulebook if possible, then leave unfinished planning open and review the prepared plan below. Do not wait beyond the allocation. Planning in **module-02-plan\start** does not need to finish before step 4 uses the supplied checkpoint in the separate **module-03-execute\start** workspace. Keep unfinished planning **pending**, use a separate **Execution** terminal, and check the planning result near the end.
 
 ### Review the plan
 
@@ -222,11 +222,15 @@ Confirm Git reports **modernization/dotnet**. The **main** branch does not conta
 
 **Live execution from a prepared checkpoint**
 
-Execution uses the supplied plan and task state on the **modernization/dotnet** branch in **module-03-execute\start**, not your live plan in **module-02-plan\start**. Live planning does not need to have completed for this checkpoint to exist. Do not copy your plan between the folders.
+Execution uses the supplied plan and task state on the **modernization/dotnet** branch in **module-03-execute\start**, not your live plan in **module-02-plan\start**. These are separate workspaces, so live planning does not need to finish before starting this prepared execution. Do not copy your plan between the folders.
 
 ### Open the execution workspace
 
-Use the idle review terminal, or open a new PowerShell tab (**+**), as your **Execution** terminal. Open this workspace even if you reviewed your live plan. First check for existing work:
+Use the idle review terminal, or open a new PowerShell tab (**+**), as your **Execution** terminal. Do not enter these commands in the busy **Planning** terminal. Open this workspace even if you reviewed your live plan.
+
+**If execution is already running against this gateway in module-03-execute\start:** Leave it running and continue to step 5. Do not switch its branch or start another execution from a terminal or VS Code.
+
+Otherwise, first check for existing work:
 
 ```powershell
 cd C:\lab\caldova\modules\module-03-execute\start
@@ -248,19 +252,30 @@ Confirm Git reports **modernization/dotnet**, not **main**. This opens the **mod
 ### Check the prepared task state and configuration
 
 1. In the module-root **.github > modernize > config.json**, confirm the same shared-rulebook settings from step 2: **feature_flags.rulebook** is **true** and **portfolio_url** is **https://github.com/ayangupt/ignite26-caldova-rulebook**. The root **rulebook** folder contains the reading copies; native loading is checked after execution starts.
-2. In this VS Code window, expand **apps > CaldovaAuthGateway > .github > modernize > caldova-dotnet-modernization > .metadata > tasks.json**. The runtime-upgrade and Web Forms-conversion tasks should already show **"status": "success"**. They are **prepared starting state**, not work you just performed.
+2. In this VS Code window, expand **apps > CaldovaAuthGateway > .github > modernize > caldova-dotnet-modernization** and confirm the supplied **plan.md** is present. Open **.metadata > tasks.json** in the same folder. The runtime-upgrade and Web Forms-conversion tasks should already show **"status": "success"**. They are **prepared starting state**, not work you just performed.
 
 ![1: Locate .metadata/tasks.json. 2: Task 001 runtime upgrade has status success. 3: Task 002 Web Forms conversion has status success.](../img/guide-annotations/annotated/caldova-task-states-annotated-918df22654f4.png)
 
 *1. Locate **tasks.json**. 2-3. Confirm **success** for the runtime upgrade and Web Forms conversion.*
 
-**If settings, task states, or tools differ:** Ask the facilitator, do not start execution, and continue to step 5. Execution is **not run**.
+**If the plan is missing, or settings, task states, or tools differ:** Ask the facilitator, do not start execution, and continue to step 5. Execution is **not run**.
 
 ### Start execution and confirm rulebook loading
 
-**Before starting:** Check the **Planning** terminal. If its run is still generating or awaiting input, leave it open and skip the command below. Also skip execution if Copilot access or rulebook loading remains blocked. Continue to step 5 with live execution **not run**.
+**Before starting:** In the idle **Execution** terminal, confirm the working directory and branch:
 
-Otherwise, start the prepared execution in the **Execution** terminal. Use this command rather than starting a second run from VS Code:
+```powershell
+Get-Location
+git branch --show-current
+```
+
+Expect **C:\lab\caldova\modules\module-03-execute\start** and **modernization/dotnet**. The command below uses this module root to load configuration and resolve **$PWD\apps\CaldovaAuthGateway**. If either check differs, return to **Open the execution workspace** above; do not run it from the planning module, an app subfolder, **finish**, or **final**.
+
+The **Planning** terminal may remain open in **module-02-plan\start**, even if generation is unfinished or awaiting an answer. That alone does not block this prepared execution. Do not select **Execute** in the planner or start another run against the same execution gateway.
+
+**If Copilot access or rulebook loading remains blocked:** Skip execution and continue to step 5 with live execution **not run**.
+
+Once these checks pass, start the prepared execution **once** in the **Execution** terminal. Do not start a second run from VS Code:
 
 ```powershell
 modernize plan execute "Execute all remaining tasks, starting with the first unfinished task. Do not stop after one task. Do not run the deployment task, provision resources, grant access, push changes or install tools." `
@@ -462,7 +477,7 @@ Stop the local app server when finished, leave any unfinished agent work identif
 | CLI rejects the model | Confirm the command includes **--model auto**; VS Code's picker is separate |
 | Rulebook-loading error | Check the actual working-directory config, shared URL and **gh auth status**; stop the affected run if still active and ask the facilitator |
 | Planner appears idle | Check for an unanswered question in the **Planning** terminal; follow the rulebook rather than leaving the prompt paused |
-| Planning exceeds its timebox | Use the prepared plan. Leave unfinished planning open; if still active at step 4, skip live execution and continue to prepared review |
+| Planning exceeds its timebox | Leave unfinished planning open as **pending** and review the supplied plan. Step 4 can use its separate prepared execution workspace after its folder, branch, plan and access checks pass |
 | Prepared plan or tasks.json is missing | The execution workspace may still be on **main**. Follow the clean-working-tree check and select **modernization/dotnet** in step 4; do not regenerate or copy a plan |
 | Rulebook folder is not visible in VS Code | Open **module-03-execute\start**, not only its gateway app. The rulebook reading copies and launch configuration are at the module root |
 | Step 6 reports an OutputPath build error or MSB1009 for the test project | The separate **finish** checkout may still be on **main**, which contains the legacy app. Follow step 5's clean-working-tree check and select **modernization/dotnet** in **finish**, then repeat step 6's preflight checks |
