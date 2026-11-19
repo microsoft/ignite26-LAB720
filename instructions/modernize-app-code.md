@@ -310,6 +310,10 @@ Inspect the prepared result for faults that a successful build or agent response
    - **mono:6.12**: the portal's Dockerfile still uses the legacy **FROM mono:6.12** base image.
    - **WhoAmI.ashx**: how the portal recognizes users through the gateway's **/WhoAmI.ashx** response. A green build does not prove this sign-in contract works.
 
+4. Before switching workspaces, read the portal's prepared execution notes. In this **CaldovaLoanPortal** window, expand **.github > modernize > caldova-dotnet-modernization > 005-transform-opentelemetry > modernization-summary.md**. This task-level summary describes the telemetry changes and **Helpers > PiiMask.cs**; it is not a summary of the entire migration or evidence from your live run.
+
+   If this supplied file is absent, record the missing artifact and tell the facilitator. Do not create a replacement; continue with the final comparison.
+
 ### Compare with the final snapshot
 
 Spend about two minutes on the **separate, supplied** final state. This is not the output of your live execution. First check that its report is present:
@@ -328,6 +332,8 @@ code --new-window $final "$final\VALIDATION.md"
 ```
 
 In the new **dotnet** VS Code window, **VALIDATION.md** is at the workspace root beside **README.md**, **manifest.json** and **apps**. It is not under **apps\CaldovaAuthGateway\.github\modernize** and is not expected in **start** or **finish**. Use **Open Preview** (**Ctrl+Shift+V**) to read it.
+
+The task-level **modernization-summary.md** notes are separate artifacts in the prepared **finish** apps, not this final snapshot. **VALIDATION.md** records the frozen snapshot's validation, not a consolidated live-execution change log.
 
 Under **apps**, confirm the three apps target .NET 10 and compare **CaldovaLoanPortal > Dockerfile** with the prepared review example. Use the report's **Observed results** and **Still environment-dependent** sections to distinguish the recorded fixes from checks that still need a configured environment.
 
@@ -367,6 +373,18 @@ Wait for both results. If either fails, inspect the error and ask the facilitato
 ![1: Build succeeded. 2: The test summary shows zero failed tests and 13 succeeded.](../img/guide-annotations/annotated/caldova-build-tests-annotated-1225a17c2c50.png)
 
 *1. Look for **Build succeeded**. 2. Check **failed: 0** in the test summary.*
+
+### Inspect the gateway and its execution notes
+
+Changing the terminal directory does not change the VS Code workspace. After both commands succeed, run this from the same **Validation** terminal to open the prepared **finish** gateway, rather than keep inspecting the portal or final snapshot:
+
+```powershell
+code --new-window .
+```
+
+In the new **CaldovaAuthGateway** window, expand **.github > modernize > caldova-dotnet-modernization > 002-transform-webforms-ashx-to-aspnetcore-mvc > modernization-summary.md**. Read **Summary** and **Changes Made** for the Web Forms/ASHX conversion and old-to-new file mappings. For example, the **WhoAmI.ashx** route is implemented in **WhoAmIEndpoint.cs**; a literal **WhoAmI.ashx** file is no longer required.
+
+These are supplied notes for that conversion task, not a report of all tasks or your live execution. If the summary is absent, record the gap and tell the facilitator; do not generate or copy substitute evidence. You can still inspect the existing source and continue the local route checks after a successful build and test.
 
 Inspect the code for an SDK-style .NET 10 project; **Microsoft.Data.SqlClient** with identity-based authentication and validated TLS (**the risks identified in step 1**); structured logs using PII masking; and preserved public routes.
 
@@ -448,6 +466,7 @@ Stop the local app server when finished, leave any unfinished agent work identif
 | Prepared plan or tasks.json is missing | The execution workspace may still be on **main**. Follow the clean-working-tree check and select **modernization/dotnet** in step 4; do not regenerate or copy a plan |
 | Rulebook folder is not visible in VS Code | Open **module-03-execute\start**, not only its gateway app. The rulebook reading copies and launch configuration are at the module root |
 | Step 6 reports an OutputPath build error or MSB1009 for the test project | The separate **finish** checkout may still be on **main**, which contains the legacy app. Follow step 5's clean-working-tree check and select **modernization/dotnet** in **finish**, then repeat step 6's preflight checks |
+| The execution summary is not visible | Open the correct **finish** app and the task subfolder named in step 5 or 6. **modernization-summary.md** is task-scoped, not at the plan root or in **final\dotnet**. Report a genuinely missing supplied file; do not create one |
 | VALIDATION.md cannot be found | Use step 5's exact **final\dotnet\VALIDATION.md** path check and open the snapshot with the report. It is not inside an app or a live run. If absent at that path, ask the facilitator and skip the final comparison; do not create a replacement |
 | The optional live-result test project is missing | A finished command is not proof of successful execution. Follow **Check completed live results**; do not copy the prepared tests or count them as live-run evidence |
 | Execution takes too long | Leave it running and use the prepared review and validation; unfinished execution is **pending** |

@@ -24,6 +24,8 @@ The execution workspace at `C:\lab\caldova\modules\module-03-execute\start` must
 
 The review workspace at `C:\lab\caldova\modules\module-03-execute\finish` is a separate Git checkout and also needs its local `modernization/dotnet` branch. Selecting that branch in `start` does not select it in `finish`. On the `finish` branch, verify the gateway targets .NET 10 and includes `Tests\CaldovaAuthGateway.Tests.csproj`; its `main` branch contains the legacy app and cannot satisfy step 6. Preserve the portal's deliberate review faults on the prepared branch.
 
+Verify the supplied execution notes in each `finish` app's `.github\modernize\caldova-dotnet-modernization` directory: `CaldovaLoanPortal` has `005-transform-opentelemetry\modernization-summary.md`, and `CaldovaAuthGateway` has `002-transform-webforms-ashx-to-aspnetcore-mvc\modernization-summary.md`. These describe individual prepared tasks, not the entire migration or a learner's live execution. Do not move them into the final snapshot or fabricate missing reports.
+
 Do not alter the deliberately flawed `finish` review example or the frozen `final\dotnet` files, rulebook copies and manifest to make historical evidence appear newly validated.
 
 The final comparison uses `C:\lab\caldova\modules\module-03-execute\final\dotnet\VALIDATION.md`. Verify that this existing, nonempty report is at the snapshot root beside `README.md`, `manifest.json` and `apps`; it is not a report learners generate in `start` or `finish`. Follow step 5's file-existence check and VS Code command on a fresh learner launch. If the packaged report is missing, restore the approved snapshot through the image-preparation process; do not fabricate validation evidence or create an empty file to satisfy the instructions.
@@ -46,8 +48,12 @@ Also rehearse the prepared-plan fallback without generating a live plan. Follow 
 
 Follow steps 5 and 6 in the separate `finish` checkout, including its own clean-working-tree check and branch selection. Confirm the test project exists, run the documented build and tests, then start the gateway with the local-only environment variables. Verify HTTP 200 from `/health` and `/WhoAmI.ashx`, with `{"authenticated":false}` from the latter, and stop only the app started for this check. A successful build in `start` or the frozen `final` snapshot does not validate this learner path.
 
+Check the editor handoff too: after viewing `final\dotnet`, step 6 must open the `finish` gateway in its own VS Code window before source and execution-summary review. A terminal `cd` does not change the editor's workspace.
+
 The optional live-result checks require successful local execution and an actual test project in `start`. The supplied `start` checkpoint does not contain `Tests\CaldovaAuthGateway.Tests.csproj`; verify the live run's output rather than treating a stopped command or the prepared tests as proof of completion.
 
 Keep shared-image promotion coordinated with the other module owners. Merging this configuration file or the documentation PR does not install dependencies, copy files into Skillable, capture a VM or complete a fresh-learner rehearsal.
+
+When publishing instruction fixes, check both the default and Catalog instruction sets without replacing Catalog-specific enrollment or timing content. Have the lab provider verify the attendee production child profile separately: successful validation of the authoring profile does not establish that production has inherited the same instructions or VM artifacts.
 
 The local gateway validation does not require provisioning Azure SQL or changing the SRE resources. Any separate live DB-assessment exercise still needs its agreed database/context and CLI capability; an inferred data model is not a live database check.
