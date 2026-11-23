@@ -1,0 +1,50 @@
+name: Self-serve setup checks
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - 'infra/**'
+      - '.github/workflows/setup-tests.yml'
+  push:
+    paths:
+      - 'scripts/**'
+      - 'infra/**'
+      - '.github/workflows/setup-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  content:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check setup using synthetic repositories and the published final checkpoint
+        shell: pwsh
+        run: ./scripts/tests/content.Tests.ps1
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Test the public checkpoint from Windows PowerShell
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: ./scripts/tests/review-final.Tests.ps1 -WithoutInstalledSdk
+      - name: Test the public checkpoint from PowerShell 7
+        if: runner.os == 'Linux'
+        shell: pwsh
+        run: ./scripts/tests/review-final.Tests.ps1
+
+  windows11-tools:
+    runs-on: windows-11-arm
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Exercise Windows 11 tool installation without a learner account
+        shell: pwsh
+        run: ./scripts/tests/content.Tests.ps1 -InstallParticipantTools

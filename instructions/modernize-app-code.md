@@ -9,23 +9,21 @@ Read an application assessment, start a rulebook-guided modernization, and check
 | Plan | 17 minutes | Configure the rules and skill, work through live planning, and review the plan |
 | Execute and verify | 20 minutes | Start execution and check prepared code, tests, and routes |
 
-This is the **50-minute .NET track** for **Caldova Bank**. Under **C:\lab\caldova\modules**, each exercise has a **start** folder (before) and a **finish** folder (prepared after). A separate **final\dotnet** snapshot shows the validated three-application end state. Do not replace the deliberately flawed **finish** review example with **final**.
+This is the **50-minute .NET track** for **Caldova Bank**. By default, the workload is under **C:\lab\caldova\modules**; setup can install it elsewhere with `-LabRoot`. Each exercise has a **start** folder (before) and a **finish** folder (prepared after). A separate **final\dotnet** snapshot shows the validated three-application end state. Do not replace the deliberately flawed **finish** review example with **final**.
 
 Work through live planning, including the agent's questions and the plan review. To fit the session, execution starts from a prepared checkpoint; review and validate the supplied code without waiting for that execution to finish. If planning exceeds its time allocation, use the prepared plan for review instead.
 
 Results from your live runs and prepared examples are separate evidence. An unfinished run is **pending**; a skipped or blocked operation is **not run**. If a run fails, inspect the error rather than treating it as success.
 
-**Separate workloads:** Caldova Bank is not Caldova Retail Co. in the later SRE Agent module. Reuse the assigned VM and accounts, but follow each module's repositories and resource names.
-
 ---
 
 ## Get ready
 
-Continue in the assigned VM after **Start > GitHub and Copilot** in the lab manual. If Windows asks you to sign in again, use the VM controls on **Resources**.
+Before the workshop, follow the [full lab setup](../README.md#full-lab-setup) on your own Windows 11 PC using the authorized starting archive and your own Copilot-enabled GitHub account. Open a new PowerShell 7 terminal on that PC for the steps below. Without the archive, use the separate [public final-checkpoint review](review-final.md); it does not set up this walkthrough. The default install location is **C:\lab\caldova**. If you selected another `-LabRoot`, replace that root in the commands and paths in this guide.
 
 ### Check sign-in and tools
 
-1. Open **Windows Terminal > PowerShell inside the VM** and check:
+1. Open **PowerShell 7** and check:
 
    ```powershell
    gh auth status
@@ -33,20 +31,20 @@ Continue in the assigned VM after **Start > GitHub and Copilot** in the lab manu
    modernize --version
    ```
 
-2. Only if GitHub CLI is signed out, keep the lab's Enterprise SSO page open in the VM browser and run:
+2. If GitHub CLI is signed out, run:
 
    ```powershell
    gh auth login
    ```
 
-   Use the arrow keys to move and **Enter** to confirm. Choose **GitHub.com > Login with a web browser**, complete the one-time-code prompt, and authorize the expected GitHub CLI request. The browser, VS Code and GitHub CLI have separate sessions even though they use the same assigned identity.
+   Choose **GitHub.com > Login with a web browser**, complete the one-time-code prompt, and authorize GitHub CLI. Then sign in to VS Code with the same GitHub account and enable Copilot in the status bar if prompted. Current VS Code includes GitHub Copilot Chat; you don't need to install the legacy Copilot extension separately. The browser, VS Code and GitHub CLI have separate sessions.
 3. Use **Auto** in VS Code. Every Modernize command below also passes **--model auto**; the VS Code model picker does not set the CLI model.
 
 ### Enter commands
 
-Focus the PowerShell prompt inside the VM before using Skillable's **Type** button or pasting. Wait until the whole command appears, then press **Enter inside the VM**. For a multiline-paste warning, check the text and select **Paste anyway** only for the expected lab command. Trust only the supplied lab workspace when VS Code asks.
+Run the commands in your PowerShell 7 terminal. Trust the supplied lab workspace when VS Code asks.
 
-**Continue when:** The folder check returns **True**, **gh auth status** succeeds, and the CLI is available. If a tool or folder is missing, ask the facilitator; do not install software, change permissions or switch to a personal account.
+**Continue when:** The folder check returns **True**, `gh auth status` succeeds, and the CLI is available. If a folder is missing, verify `-LabRoot` and rerun setup in a new, empty destination. Do not overwrite an existing learner workspace.
 
 ---
 
@@ -118,7 +116,7 @@ Get-ChildItem "$skills\pii-masking"
 
 The list should include **SKILL.md**. Open it in VS Code to see what the skill asks the agent to do.
 
-**If config or access is missing:** Ask the facilitator and use **Step 3 - Review the plan** to open the prepared plan. Live operations that cannot start are **not run**. Do not substitute a local folder or invent a URL.
+**If config or access is missing:** Run `scripts/verify.ps1` from the cloned repository and fix the reported issue. If live planning is unavailable, use **Step 3 - Review the plan** to open the prepared plan. Live operations that cannot start are **not run**. Do not substitute a different rulebook or invent a URL.
 
 ---
 
@@ -168,7 +166,7 @@ After submitting the goal, look for **SUCCESS: Rulebook loaded (3 files)**. It a
 
 The message confirms that the CLI read the shared rules; it does not mean the plan is complete or that the plan/code complies. A delayed message is not itself a loading error.
 
-**If the command fails:** Inspect the error and tell the facilitator. If native loading fails while the run remains active, stop that run. Use the prepared plan below; do not claim a successful live plan. HTTP 403 or another Copilot access error means live work is blocked, not an invitation to switch accounts.
+**If the command fails:** Inspect the error. If native loading fails while the run remains active, stop that run. Use the prepared plan below; do not claim a successful live plan. HTTP 403 or another Copilot access error means live work is blocked; check the current account's Copilot entitlement rather than switching to an unrelated account.
 
 ### Answer questions and confirm the plan
 
@@ -233,7 +231,7 @@ code apps\CaldovaAuthGateway
 
 *1. Locate **tasks.json**. 2-3. Confirm **success** for the runtime upgrade and Web Forms conversion.*
 
-**If settings, task states, or tools differ:** Ask the facilitator, do not start execution, and continue to step 5. Execution is **not run**.
+**If settings, task states, or tools differ:** Do not start execution. Continue to step 5 and use the prepared review. Execution is **not run**.
 
 ### Start execution and confirm rulebook loading
 
@@ -253,7 +251,7 @@ Look for **Rulebook loaded (3 files)** in this execution too; the planning works
 
 **Continue when:** The message appears and execution is underway. Leave the terminal running and move to step 5 **without waiting for tasks to finish**.
 
-**If the message is delayed:** At the end of this step's three-minute allocation, continue to the prepared review with execution **pending** and loading unconfirmed. Do not start a duplicate. If an actual loading/access error appears, inspect it, stop that run if still active, and ask the facilitator; use the prepared review instead.
+**If the message is delayed:** At the end of this step's three-minute allocation, continue to the prepared review with execution **pending** and loading unconfirmed. Do not start a duplicate. If an actual loading/access error appears, inspect it, stop that run if still active, and use the prepared review instead.
 
 ---
 
@@ -314,7 +312,7 @@ dotnet build
 dotnet test Tests\CaldovaAuthGateway.Tests.csproj
 ```
 
-Wait for both results. If either fails, inspect the error and ask the facilitator before starting the app.
+Wait for both results. If either fails, inspect the error before starting the app.
 
 ![1: Build succeeded. 2: The test summary shows zero failed tests and 13 succeeded.](../img/guide-annotations/annotated/caldova-build-tests-annotated-1225a17c2c50.png)
 
@@ -335,7 +333,7 @@ dotnet run
 
 **Continue when:** This terminal reports that the app is listening on **port 8080** and the process stays running. Do not wait for **dotnet run** to finish; the server must remain available for the requests.
 
-**If the app exits or port 8080 is already in use:** Do not count responses from another process as this app's results. Ask the facilitator; do not terminate an unknown process.
+**If the app exits or port 8080 is already in use:** Do not count responses from another process as this app's results. Do not terminate an unknown process.
 
 ### Check the local routes
 
@@ -352,7 +350,7 @@ Expect HTTP 200 from both, and **{"authenticated":false}** from **/WhoAmI.ashx**
 
 *1. **/health**: HTTP 200 and **OK**. 2. **/WhoAmI.ashx**: HTTP 200 and **{"authenticated":false}**.*
 
-These checks validate the prepared gateway, not your live execution, database-backed login, or Azure telemetry delivery. The VM, Azure and TAP credentials are **not application test-user credentials**. Missing DB/app-login inputs mean **not verified**, not an invitation to guess credentials or create resources.
+These checks validate the prepared gateway, not your live execution, database-backed login, or cloud telemetry delivery. Missing DB/app-login inputs mean **not verified**, not an invitation to guess credentials or create resources.
 
 ### Check completed live results, if time permits
 
@@ -376,21 +374,19 @@ If a live run is still active, it remains **pending**; if skipped, it is **not r
 
 Using prepared artifacts for review and validation is the intended shortened flow, not proof that your live upgrade finished. Check any completed live results separately; unfinished work remains **pending**, and skipped operations are **not run**.
 
-Stop the local app server when finished, leave any unfinished agent work identified, and follow the facilitator's handoff. Do not reset the shared lab.
-
-**Continue to [Automate operations with Azure SRE Agent](sre-agent.md)** or **SRE Agent** in the full lab manual, using its own workload and resources.
+Stop the local app server when finished, and leave any unfinished agent work identified. Do not reset or overwrite the prepared lab artifacts.
 
 ### If something did not work
 
 | Symptom | Next action |
 |---|---|
-| Lab folder or tool missing | Ask the facilitator; do not install or use personal access |
+| Lab folder or tool missing | Check the selected `-LabRoot`, rerun setup in a new empty destination, and open a new PowerShell terminal |
 | CLI rejects the model | Confirm the command includes **--model auto**; VS Code's picker is separate |
-| Rulebook-loading error | Check the actual working-directory config, shared URL and **gh auth status**; stop the affected run if still active and ask the facilitator |
+| Rulebook-loading error | Run `scripts/verify.ps1`; check the actual working-directory config and `gh auth status`; stop the affected run if still active |
 | Planner appears idle | Check for an unanswered question in the **Planning** terminal; follow the rulebook rather than leaving the prompt paused |
 | Planning exceeds its timebox | Use the prepared plan. Leave unfinished planning open; if still active at step 4, skip live execution and continue to prepared review |
 | Execution takes too long | Leave it running and use the prepared review and validation; unfinished execution is **pending** |
-| Local app cannot bind port 8080 | Do not treat another process's responses as this app's results; ask the facilitator without terminating an unknown process |
+| Local app cannot bind port 8080 | Do not treat another process's responses as this app's results; do not terminate an unknown process |
 | Build passes but login fails | Inspect the gateway/portal contract and required DB/app-user setup |
 
 ### Reference: CLI alternatives

@@ -1,0 +1,16 @@
+{
+  "baseline": "LAB720 teaching packages recorded in the environment handoff",
+  "provenance": "https://github.com/microsoft/ignite26-lab-management/issues/689",
+  "rehearsal": {
+    "fileName": "caldova-rehearsal.zip",
+    "url": null,
+    "sha256": "3ccd36a065f354a16f219aa8b89660b4195fb01655e748e0fdd04c01ef41f231"
+  },
+  "final": {
+    "fileName": "part2-validated-final-dotnet-20261027.zip",
+    "sha256": "b109e6bf489552cd0050ce7044c4d07f1c0d85d926a568883a464d331c4fa6dd",
+    "manifestSha256": "9617220491e247c5d8011e94703af376ddf4d220c758226453bec612402ecfd0",
+    "url": "https://raw.githubusercontent.com/microsoft/ignite26-PREL38/d1b26dfbfc4727279594b038a4ed5f208e6b65c2/app-modernization/final/part2-validated-final-dotnet-20261027.zip",
+    "fileCount": 84
+  }
+}
